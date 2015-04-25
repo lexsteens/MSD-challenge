@@ -16,11 +16,11 @@ ts = open('kaggle_visible_evaluation_triplets_ts.txt', 'w')
 vs = open('kaggle_visible_evaluation_triplets_vs.txt', 'w')
 for user in user_to_songs:
 	l = len(user_to_songs[user])
-	if l >= 20:
+	if l >= 10:
 		i = 0
 		for song in user_to_songs[user]:
 			i += 1
-			if i <= l/2:
+			if i <= 3*l/6:
 				ts.write('\t'.join([user, song[0], song[1]]) + '\n')
 			else:
 				vs.write('\t'.join([user, song[0], song[1]]) + '\n')

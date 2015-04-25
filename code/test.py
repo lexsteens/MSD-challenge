@@ -4,7 +4,7 @@ import time
 a = [[1.] * 163000] * 110000
 b = []
 
-n = 10000
+n = 110000
 sti=time.clock()
 for i in range(n):
 

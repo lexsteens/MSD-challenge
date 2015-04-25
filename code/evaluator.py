@@ -44,7 +44,7 @@ class evaluator:
 	
 	def aveP(self, ranking, ranking_vs, user):
 	
-		if user == '4551a4fa1279fab25af499086fb7bdb5ea6b6105':
+		if user == '':
 			print user
 			for d in ranking[:20]:
 				print d, d in ranking_vs
@@ -53,7 +53,7 @@ class evaluator:
 		denom = min(len(filter(lambda x: x in ranking, ranking_vs)), self.K)
 		res = sumPrec / denom if denom > 0 else 0
 
-		if user == '4551a4fa1279fab25af499086fb7bdb5ea6b6105':
+		if user == '0093ea2ad5eebbfe7635a70909b7988d1b340a5a':
 			# print range(min(len(ranking), self.K))
 			print "Average Precision @", self.K, ":", sumPrec, "/", denom, "=", res
 		
@@ -62,7 +62,7 @@ class evaluator:
 	def precision(self, l, ranking, ranking_vs, user):
 		res = 1. * reduce(lambda x,y: x+y, map(lambda d: 1 if d in ranking_vs else 0, ranking[:l])) / l
 		
-		if user == '4551a4fa1279fab25af499086fb7bdb5ea6b6105':
+		if user == '0093ea2ad5eebbfe7635a70909b7988d1b340a5a':
 			print "Precision @", l, ":", res
 		return res
 		
