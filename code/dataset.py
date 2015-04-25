@@ -95,9 +95,9 @@ if __name__ == '__main__':
 	print matrix.index2user[5]
 	print map(lambda x: (matrix.index2item[x[0]], x[1]), matrix.user_item_matrix['count'][5].iteritems())
 	print
-	print matrix.item_user_matrix['count'][136139]
-	print matrix.index2item[136139]
-	print map(lambda x: (matrix.index2user[x[0]], x[1]), matrix.item_user_matrix['count'][136139].iteritems())
+	print matrix.item_user_matrix['count'][183117]
+	print matrix.index2item[183117]
+	print map(lambda x: (matrix.index2user[x[0]], x[1]), matrix.item_user_matrix['count'][183117].iteritems())
 		
 
 	# matrix = user_item_matrix()
