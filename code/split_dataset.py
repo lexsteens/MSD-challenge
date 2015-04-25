@@ -16,7 +16,7 @@ ts = open('kaggle_visible_evaluation_triplets_ts.txt', 'w')
 vs = open('kaggle_visible_evaluation_triplets_vs.txt', 'w')
 for user in user_to_songs:
 	l = len(user_to_songs[user])
-	if l >= 10:
+	if l >= 40:
 		i = 0
 		for song in user_to_songs[user]:
 			i += 1

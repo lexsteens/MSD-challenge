@@ -1,38 +1,49 @@
-from user_item_matrix import user_item_matrix
+from dataset import dataset
 import math
+import time
 
-class user_similarities:
-	def __init__(self, user_item_matrix):
-		self.user_item_matrix = user_item_matrix
+class similarities:
+	def __init__(self, dataset):
+		self.dataset = dataset
 		self.similarities = {}
+		
 		self.calculate_similarities()
 	
 	
 		
 	def calculate_similarities(self):		
-		matrix = self.user_item_matrix.matrix
-		user_list = self.user_item_matrix.user_list
-		users = sorted(user_list.itervalues())
+		user_item_matrix = self.dataset.user_item_matrix
+		item_user_matrix = self.dataset.item_user_matrix
+		users = sorted(user_item_matrix['count'].iterkeys())
 		n = len(users)
 		
 		self.similarities['cosine'] = {}
-		self.similarities['cosine']['binary'] = [[0.] * n] * n
-		self.similarities['cosine']['count'] = [[0.] * n] * n
-		print users[:4]
+		self.similarities['cosine']['binary'] = {}
+		self.similarities['cosine']['count'] = {}
 		
+		sti = time.clock()
 		i = 0
-		sim = []
-		for u in users:
+		
+		# iterate on users
+		for user in users:
+		
+			# show timing estimate:
 			i += 1
 			if i % 100 == 00:
-				print i
-				
+				cti = time.clock()
+				t = cti - sti
+				print "%d / %d) tot secs: %f (%f / user)"%(i, n, t,t/(i+1))
 			
-			for v in users:
-				a = 1
-				#self.similarities['cosine']['binary'][u][v] = self.cosine(matrix['binary'][u], matrix['binary'][v])
-				#print u, v, self.similarities['cosine']['binary']
-				
+			# find all users with at least one song in common:
+			users_to_compute = set()
+			for item in user_item_matrix['count'][user]:
+				for v in item_user_matrix['count'][item]:
+					users_to_compute.add(v)
+			
+			# for all those users, compute the distance:
+			self.similarities['cosine']['count'][user] = {}
+			for v in users_to_compute:
+				self.similarities['cosine']['count'][user][v] = self.cosine(user_item_matrix['count'][user], user_item_matrix['count'][v])
 			
 		
 	
@@ -47,8 +58,19 @@ class user_similarities:
 		
 	
 if __name__ == '__main__':
-	matrix = user_item_matrix()
-	simi = user_similarities(matrix)
+	dataset = dataset('kaggle_visible_evaluation_triplets_ts.txt')
+	simi = similarities(dataset)
+	
+	keys = dataset.user_item_matrix['count'].keys()
+	a_user_index = keys[0]
+	a_user = dataset.index2user[a_user_index]
+	print a_user_index, a_user
+	for user_index in simi.similarities['cosine']['count'][a_user_index]:
+		user = dataset.index2user[user_index]
+		sim = simi.similarities['cosine']['count'][a_user_index][user_index]
+		print user_index, user, sim
+	
+	
 	# a = {'s': 4.75, 't': 4.5, 'u': 5, 'v': 4.25, 'w': 4}
 	# b = {'s': 4, 't': 3, 'u': 5, 'v': 2, 'w': 1}
 	# print simi.cosine(a, b)
