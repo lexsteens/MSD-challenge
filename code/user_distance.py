@@ -42,10 +42,10 @@ class user_distance:
 	def nearestNeighboors(self, user):
 		distances = self.dist(user)
 		
-		if user == 65537:
-			print user, self.dataset.index2user[user]
-			for user_b in distances:
-				print user_b, dataset.index2user[user_b], distances[user_b]
+		# if user == 65537:
+			# print user, self.dataset.index2user[user]
+			# for user_b in distances:
+				# print user_b, self.dataset.index2user[user_b], distances[user_b]
 		
 		return sorted(distances.items(), key=lambda x: x[1])
 	

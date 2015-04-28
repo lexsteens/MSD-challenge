@@ -3,7 +3,7 @@ import datetime
 
 class evaluator:
 	def __init__(self, K):
-		print "evaluator loading vs..."
+		print "evaluator loading validation set..."
 		vs = {};
 		fVs = open('kaggle_visible_evaluation_triplets_vs.txt')
 		for line in fVs:
