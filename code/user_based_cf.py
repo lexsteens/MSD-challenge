@@ -21,19 +21,22 @@ class user_based_cf_recommender:
 		
 		return sorted(ranking.items(), key=lambda x: x[1])
 		
-	
+
+		
 if __name__ == '__main__':
-	dataset = dataset('kaggle_visible_evaluation_triplets_ts.txt')
-	dist = user_distance(dataset, 'cosine', 'count')
-	evaluator = evaluator(500)
+	dataset_ts = dataset('kaggle_visible_evaluation_triplets_ts.txt')
+	dist = user_distance(dataset_ts, 'cosine', 'count')
+	recommender = user_based_cf_recommender(dataset_ts, dist, 3)
 	
-	recommender = user_based_cf_recommender(dataset, dist, 3)
+	dataset_vs = dataset('kaggle_visible_evaluation_triplets_vs.txt')
+	evaluator = evaluator(dataset_vs, 500)
+	
 	# evaluator.add_ranking(65537, map(lambda x: x[0], recommender.recommend(65537)))
 	# print evaluator.get_MAP()
 	
 	
 	
-	users = sorted(dataset.user_item_matrix['binary'].iterkeys())
+	users = sorted(dataset_ts.user_item_matrix['binary'].iterkeys())
 	n = len(users)
 	
 	sti = time.clock()
@@ -44,9 +47,10 @@ if __name__ == '__main__':
 	
 		# show timing estimate:
 		i += 1
-		if i % 100 == 00:
+		if i % 100 == 0 and i > 0:
 			cti = time.clock()
 			t = cti - sti
-			print "%d / %d) tot secs: %f (%f / user)"%(i, n, t,t/(i+1))
+			print "%d / %d) tot secs: %f (%f / user) %d"%(i, n, t,t/(i+1), evaluator.get_MAP())
 	
-		recommender.recommend(user)
+		evaluator.add_ranking(user, recommender.recommend(user))
+	

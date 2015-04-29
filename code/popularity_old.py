@@ -1,4 +1,4 @@
-from evaluator import evaluator
+from evaluator_old import evaluator
 import sys
 
 f = open('kaggle_visible_evaluation_triplets_ts.txt', 'r')
