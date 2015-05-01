@@ -4,6 +4,7 @@ from dataset import dataset
 
 class evaluator:
 	def __init__(self, dataset, K):
+		self.dataset = dataset
 		vs = dataset.user_item_matrix['count']
 		
 		# print len(vs)
@@ -22,54 +23,68 @@ class evaluator:
 		self.sumAveP = 0.
 		self.numUsers = 0
 		
+		self.average_precision = {}
+		
 		print "evaluator ready."
-		
-	def add_ranking(self, user, ranking):
-		ranking_vs = self.vs_ranked[user]
-		# print user
-		# print ranking[:100]
-		# print ranking_vs
-		# print user, self.aveP(ranking, ranking_vs, user)
-		self.sumAveP += self.aveP(ranking, ranking_vs, user)
-		self.numUsers += 1
-	
-	def aveP(self, ranking, ranking_vs, user):
-	
-		# if user == 65537:
-			# print user
-			# for d in ranking[:20]:
-				# print d, d in ranking_vs
-				
-		sumPrec = reduce(lambda x,y: x+y, map(lambda l: self.precision(l + 1, ranking, ranking_vs, user) if ranking[l] in ranking_vs else 0, range(min(len(ranking), self.K))), 0.)
-		denom = min(len(filter(lambda x: x in ranking, ranking_vs)), self.K)
-		res = sumPrec / denom if denom > 0 else 0
-
-		# if user == 65537:
-			# print range(min(len(ranking), self.K))
-			# print "Average Precision @", self.K, ":", sumPrec, "/", denom, "=", res
-		
-		return res
-		
-		
-		
-	def optimized_aveP(self, ranking, ranking_vs):
-		for i in range(self.K):
-			a = 1
-		
-		
-	
-	def precision(self, l, ranking, ranking_vs, user):
-		res = 1. * reduce(lambda x,y: x+y, map(lambda d: 1 if d in ranking_vs else 0, ranking[:l])) / l
-		
-		if user == 65537:
-			print "Precision @", l, ":", res
-		return res
 			
 		
-		
+	
+	
+	def save_details(self, filename):
+		with open(filename, 'w') as f:
+			for user, value in self.average_precision.items():
+				f.write(' '.join([str(user), str(value)]) + "\n")
+			
+	
+	
 		
 	def get_MAP(self):
-		return self.sumAveP / self.numUsers
+		return reduce(lambda x, y: x+y, [value for item, value in self.average_precision.items()]) / len(self.average_precision)
+		
+		
+		
+		
+		
+	def add_ranking(self, user, ranking):
+		ranking = [item for item, score, rank in ranking]
+		ranking_vs = self.vs_ranked[user]
+		
+		self.average_precision[user] = self.aveP(ranking, ranking_vs, user)
+		
+		# if user < 25:
+			# print ranking[:25]
+			# print ranking_vs[:25]
+			# print self.optimized_aveP(ranking, ranking_vs, user)
+			# print self.sumAveP, self.sumAveP / self.numUsers, self.get_MAP()
+		
+		
+		
+	def aveP(self, ranking, ranking_vs, user):
+		# print user
+		level = 0
+		correct_items = 0.
+		sumPrec = 0.
+		
+		for item in ranking[:self.K]:
+			level += 1
+			
+			if item in ranking_vs:
+				correct_items += 1
+				prec = correct_items / level
+				# print "Precision @", level, ":", prec, '(', self.dataset.index2item[item], ')'
+				sumPrec += prec
+		
+		denom = min(correct_items, self.K)
+		# if denom == 0:
+			# print "Denom = 0 for user:", user, self.dataset.index2user[user], denom
+		res  = sumPrec / denom if denom > 0 else 0
+		
+		# print "Average Precision @", self.K, ":", res
+		
+		return res
+		
+		
+	
 
 		
 		
