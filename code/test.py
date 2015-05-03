@@ -2,6 +2,12 @@
 import numpy as np
 import pylab as P
 
+
+a = set([1,2])
+b = set([1,3])
+print a & b
+
+
 #
 # The hist() function now has a lot more options
 #
@@ -9,20 +15,20 @@ import pylab as P
 #
 # first create a single histogram
 #
-mu, sigma = 200, 25
-x = mu + sigma*P.randn(10000)
+# mu, sigma = 200, 25
+# x = mu + sigma*P.randn(10000)
 
 
 
 # the histogram of the data with histtype='step'
-n, bins, patches = P.hist(x, normed=1, histtype='bar', rwidth=0.8)
+# n, bins, patches = P.hist(x, normed=1, histtype='bar', rwidth=0.8)
 
-P.figure()
-bins = [100,125,150,160,170,180,190,200,210,220,230,240,250,275,300]
-n, bins, patches = P.hist(x, bins, normed=1, histtype='bar', rwidth=0.8)
+# P.figure()
+# bins = [100,125,150,160,170,180,190,200,210,220,230,240,250,275,300]
+# n, bins, patches = P.hist(x, bins, normed=1, histtype='bar', rwidth=0.8)
 
 
-P.show()
+# P.show()
 
 
 

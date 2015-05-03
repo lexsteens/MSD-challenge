@@ -94,7 +94,17 @@ why??
 
 \begin_layout Enumerate
 The number of songs in the validation set: the fewer they are, the lower
- the denominator is, increasing the average precision
+ the denominator is, increasing the average precision 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+check if true!
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

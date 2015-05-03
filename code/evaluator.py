@@ -50,12 +50,7 @@ class evaluator:
 		ranking_vs = self.vs_ranked[user]
 		
 		self.average_precision[user] = self.aveP(ranking, ranking_vs, user)
-		
-		# if user < 25:
-			# print ranking[:25]
-			# print ranking_vs[:25]
-			# print self.optimized_aveP(ranking, ranking_vs, user)
-			# print self.sumAveP, self.sumAveP / self.numUsers, self.get_MAP()
+
 		
 		
 		
