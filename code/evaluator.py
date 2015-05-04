@@ -3,8 +3,9 @@ import datetime
 from dataset import dataset
 
 class evaluator:
-	def __init__(self, dataset, K):
+	def __init__(self, dataset, K, filename):
 		self.dataset = dataset
+		self.filename = filename
 		vs = dataset.user_item_matrix['count']
 		
 		# print len(vs)
@@ -30,8 +31,9 @@ class evaluator:
 		
 	
 	
-	def save_details(self, filename):
-		with open(filename, 'w') as f:
+	def save_details(self):
+		with open(self.filename, 'w') as f:
+			f.write(' '.join(['all', str(self.get_MAP())]) + "\n")
 			for user, value in self.average_precision.items():
 				f.write(' '.join([str(user), str(value)]) + "\n")
 			

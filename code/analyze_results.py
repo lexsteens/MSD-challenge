@@ -19,13 +19,13 @@ for user_idx, value in MAP.items():
 	history_length = len(dataset_ts.user_item_matrix['count'][user_idx])
 	user = dataset_ts.index2user[user_idx]
 	
-	if history_length == 10:
-		print user_idx
+	# if history_length == 10:
+		# print user_idx
 	
 	if history_length not in length_distribution:
 		length_distribution[history_length] = []
 	length_distribution[history_length].append(value)
-	
+
 MAP_by_history_length = {}
 dist_of_history_length = {}
 aveP_at_zero_by_history_length = {}
