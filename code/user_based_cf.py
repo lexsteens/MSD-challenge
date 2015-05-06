@@ -10,6 +10,8 @@ class user_based_cf_recommender:
 	def __init__(self, dataset, distances, Qs):
 		self.dataset = dataset
 		self.distances = distances
+		self.construction = self.distances.construction
+		self.method = self.distances.method
 		self.Qs = Qs
 	
 	def recommend_user(self, user):
@@ -35,13 +37,13 @@ class user_based_cf_recommender:
 					# debug_info['similar_users'][similar_user_name]['dist'] = dist
 					# debug_info['similar_users'][similar_user_name]['songs'] = {}
 				
-				for item in self.dataset.user_item_matrix['binary'][similar_user]:
+				for item in self.dataset.user_item_matrix[self.construction][similar_user]:
 				
 					# if user_name == user_to_debug:
 						# item_id = self.dataset.index2item[item]
 						# debug_info['similar_users'][similar_user_name]['songs'][item_id] = self.dataset.user_item_matrix['count'][similar_user][item]
 					
-					if item not in self.dataset.user_item_matrix['binary'][user]:
+					if item not in self.dataset.user_item_matrix[self.construction][user]:
 						if  item not in ranking:
 							ranking[item] = 0
 						ranking[item] += pow(dist, q)
@@ -71,7 +73,7 @@ def recommend_users(dataset_ts, dataset_vs, method, construction, alphas=[0.5], 
 		
 		recommender = user_based_cf_recommender(dataset_ts, distances, Qs)
 		
-		users = sorted(dataset_ts.user_item_matrix['binary'].iterkeys())
+		users = sorted(dataset_ts.user_item_matrix[construction].iterkeys())
 		n = len(users)
 		
 		sti = time.clock()
@@ -92,9 +94,9 @@ def recommend_users(dataset_ts, dataset_vs, method, construction, alphas=[0.5], 
 			
 		
 if __name__ == '__main__':
-	dataset_ts = dataset('kaggle_visible_evaluation_triplets_ts.txt')	
-	dataset_vs = dataset('kaggle_visible_evaluation_triplets_vs.txt')
-	recommend_users(dataset_ts, dataset_vs, 'cosine', 'binary', alphas=[float(val)/100 for val in range(0, 110, 5)], Qs=range(1, 2))
+	dataset_ts = dataset('kaggle_visible_evaluation_triplets_ts.txt', user_item_constructions=['tfidf'])	
+	dataset_vs = dataset('kaggle_visible_evaluation_triplets_vs.txt', user_item_constructions=['count'], item_user_constructions=[])
+	recommend_users(dataset_ts, dataset_vs, 'cosine', 'tfidf', alphas=[float(val)/100 for val in range(0, 110, 5)], Qs=range(1, 2))
 	
 
 	
