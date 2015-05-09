@@ -94,9 +94,8 @@ def recommend_users(dataset_ts, dataset_vs, method, construction, alphas=[0.5], 
 			
 		
 if __name__ == '__main__':
-	dataset_ts = dataset('kaggle_visible_evaluation_triplets_ts.txt', user_item_constructions=['tfidf'])	
+	dataset_ts = dataset('kaggle_visible_evaluation_triplets_ts.txt', user_item_constructions=['binary'])	
 	dataset_vs = dataset('kaggle_visible_evaluation_triplets_vs.txt', user_item_constructions=['count'], item_user_constructions=[])
-	recommend_users(dataset_ts, dataset_vs, 'cosine', 'tfidf', alphas=[float(val)/100 for val in range(0, 110, 5)], Qs=range(1, 2))
 	
 
 	

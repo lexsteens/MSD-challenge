@@ -49,3 +49,4 @@ code/*.txt
 *.lyx~
 ~*
 report/#*#
+code/datasets/*

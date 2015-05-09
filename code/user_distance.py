@@ -104,7 +104,9 @@ if __name__ == '__main__':
 	sti = time.clock()
 	i = 0
 	
-
+	sumLengths = 0
+	minLengths = 99999999
+	maxLengths = 0
 	for user in users:
 	
 		i += 1
@@ -113,7 +115,14 @@ if __name__ == '__main__':
 			t = cti - sti
 			print "%d / %d) tot secs: %f (%f / user)"%(i, n, t,t/(i+1))
 		
-		dist.nearestNeighboors(user)
+		nn = dist.nearestNeighboors(user)
+		l = len(nn)
+		sumLengths += l
+		minLengths = min(l, minLengths)
+		maxLengths = max(l, maxLengths)
+	print sumLengths/len(users)
+	print minLengths
+	print maxLengths
 	
 	
 	# a = {'s': 4.75, 't': 4.5, 'u': 5, 'v': 4.25, 'w': 4}

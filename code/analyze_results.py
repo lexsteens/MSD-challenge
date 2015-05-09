@@ -5,13 +5,14 @@ import matplotlib.pyplot as plt
 a = [1, 2]
 print np.mean(a)
 
-dataset_ts = dataset('kaggle_visible_evaluation_triplets_ts.txt')
+dataset_ts = dataset('kaggle_visible_evaluation_triplets_ts.txt', user_item_constructions=['count'])
 
 MAP = {}
-with open('evaluator_cosine2.txt', 'r') as f:
+with open('datasets/kaggle_visible_evaluation_triplets/MAP_cosine_binary_alpha=0.8_q=1.txt', 'r') as f:
 	for line in f:
 		user_idx, value = line.strip().split(' ')
-		MAP[int(user_idx)] = float(value)
+		if user_idx != 'all':
+			MAP[int(user_idx)] = float(value)
 
 
 length_distribution = {}		
