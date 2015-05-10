@@ -7,15 +7,16 @@ import json
 global_debug_info = {}
 
 class user_based_cf_recommender:
-	def __init__(self, dataset, distances, Qs):
+	def __init__(self, dataset, distances, Qs, mnn=500):
 		self.dataset = dataset
 		self.distances = distances
 		self.construction = self.distances.construction
 		self.method = self.distances.method
 		self.Qs = Qs
+		self.mnn = mnn
 	
 	def recommend_user(self, user):
-		similar_users = self.distances.nearestNeighboors(user)
+		similar_users = self.distances.nearestNeighboors(user)[:self.mnn]
 		
 		# user_to_debug = 'c34670d9c1718361feb93068a853cead3c95b76a'
 
@@ -58,7 +59,7 @@ class user_based_cf_recommender:
 		return recs
 		
 
-def recommend_users(dataset_ts, dataset_vs, method, construction, alphas=[0.5], Qs=[3]):
+def recommend_users(dataset_ts, dataset_vs, method, construction, alphas=[0.5], Qs=[3], mnn=500):
 	print "alphas: ", alphas
 	print "Qs: ", Qs
 	for alpha in alphas:
@@ -66,12 +67,12 @@ def recommend_users(dataset_ts, dataset_vs, method, construction, alphas=[0.5], 
 		
 		evaluators = []
 		for q in Qs:
-			filename = "MAP_" + method + "_" + construction + "_alpha=" + str(alpha) + "_q=" + str(q) + ".txt"
+			filename = "MAP_" + method + "_" + construction + "_alpha=" + str(alpha) + "_mnn=" + str(mnn)+ "_q=" + str(q) + ".txt"
 			print filename
 			ev = evaluator(dataset_vs, 500, filename)
 			evaluators.append(ev)
 		
-		recommender = user_based_cf_recommender(dataset_ts, distances, Qs)
+		recommender = user_based_cf_recommender(dataset_ts, distances, Qs=Qs, mnn=mnn)
 		
 		users = sorted(dataset_ts.user_item_matrix[construction].iterkeys())
 		n = len(users)
@@ -96,7 +97,7 @@ def recommend_users(dataset_ts, dataset_vs, method, construction, alphas=[0.5], 
 if __name__ == '__main__':
 	dataset_ts = dataset('kaggle_visible_evaluation_triplets_ts.txt', user_item_constructions=['binary'])	
 	dataset_vs = dataset('kaggle_visible_evaluation_triplets_vs.txt', user_item_constructions=['count'], item_user_constructions=[])
-	recommend_users(dataset_ts, dataset_vs, 'cosine', 'binary', alphas=[float(val)/100 for val in range(70, 85, 5)], Qs=range(2, 5))
+	recommend_users(dataset_ts, dataset_vs, 'cosine', 'binary', alphas=[float(val)/100 for val in range(75, 80, 5)], Qs=range(1, 2), mnn=50)
 	
 
 	

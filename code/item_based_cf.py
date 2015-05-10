@@ -7,7 +7,7 @@ import json
 global_debug_info = {}
 
 class item_based_cf_recommender:
-	def __init__(self, dataset, distances, Qs):
+	def __init__(self, dataset, distances, Qs, mnn):
 		self.dataset = dataset
 		self.distances = distances
 		self.construction = self.distances.construction
@@ -26,34 +26,39 @@ class item_based_cf_recommender:
 				t = cti - sti
 				print "%d / %d) tot secs: %f (%f / item)"%(i, len(i2u), t,t/(i+1))
 		
-			self.nearestItems[item] = self.distances.nearestNeighboors(item)
+			self.nearestItems[item] = self.distances.nearestNeighboors(item)[:mnn]
 		print "done."
 			
 	
 	def recommend_user(self, user):
 		
-		recs = []
-		for q in self.Qs:		
-			scores = {}
-			for item in self.dataset.user_item_matrix[self.construction][user]:
-				# print self.dataset.index2item[item]
+		scores = []
+		for idx, q in enumerate(self.Qs):
+			scores.append({})
+		
+		for item in self.dataset.user_item_matrix[self.construction][user]:
+			# print self.dataset.index2item[item]
 
-				for similar_item, dist in self.nearestItems[item]:
+			for similar_item, dist in self.nearestItems[item]:
+				# print self.dataset.index2item[item], self.dataset.index2item[similar_item], dist
+
+				if similar_item not in self.dataset.user_item_matrix[self.construction][user]:
 					# print self.dataset.index2item[item], self.dataset.index2item[similar_item], dist
-
-					if similar_item not in self.dataset.user_item_matrix[self.construction][user]:
-						# print self.dataset.index2item[item], self.dataset.index2item[similar_item], dist
-						if similar_item not in scores:
-							scores[similar_item] = 0
-						scores[similar_item] += pow(dist, q)
-			
-			rec = [(tuple[0], tuple[1], idx) for idx, tuple in enumerate(sorted(scores.items(), key=lambda x: x[1], reverse=True))]
+					for idx, q in enumerate(self.Qs):
+						if similar_item not in scores[idx]:
+							scores[idx][similar_item] = 0
+						scores[idx][similar_item] += pow(dist, q)
+		
+		recs = []
+		for idx, q in enumerate(self.Qs):
+			rec = [(tuple[0], tuple[1], idx) for idx, tuple in enumerate(sorted(scores[idx].items(), key=lambda x: x[1], reverse=True))]
 			recs.append(rec)
 		
 		return recs
 		
+		
 
-def recommend_users(dataset_ts, dataset_vs, method, construction, alphas=[0.5], Qs=[3]):
+def recommend_users(dataset_ts, dataset_vs, method, construction, alphas=[0.5], Qs=[1], mnn=500):
 	print "alphas: ", alphas
 	print "Qs: ", Qs
 	for alpha in alphas:
@@ -61,12 +66,12 @@ def recommend_users(dataset_ts, dataset_vs, method, construction, alphas=[0.5], 
 		
 		evaluators = []
 		for q in Qs:
-			filename = "MAP_icf_" + method + "_" + construction + "_alpha=" + str(alpha) + "_q=" + str(q) + ".txt"
+			filename = "MAP_icf_" + method + "_" + construction + "_alpha=" + str(alpha) + "_mnn=" + str(mnn) + "_q=" + str(q) + ".txt"
 			print filename
 			ev = evaluator(dataset_vs, 500, filename)
 			evaluators.append(ev)
 		
-		recommender = item_based_cf_recommender(dataset_ts, distances, Qs)
+		recommender = item_based_cf_recommender(dataset_ts, distances, Qs=Qs, mnn=mnn)
 		
 		users = sorted(dataset_ts.user_item_matrix[construction].iterkeys())
 		n = len(users)
@@ -91,7 +96,7 @@ def recommend_users(dataset_ts, dataset_vs, method, construction, alphas=[0.5], 
 if __name__ == '__main__':
 	dataset_ts = dataset('kaggle_visible_evaluation_triplets_ts.txt', user_item_constructions=['binary'])	
 	dataset_vs = dataset('kaggle_visible_evaluation_triplets_vs.txt', user_item_constructions=['count'], item_user_constructions=[])
-	recommend_users(dataset_ts, dataset_vs, 'cosine', 'binary', alphas=[float(val)/100 for val in range(95, 100, 5)], Qs=range(1,5))
+	recommend_users(dataset_ts, dataset_vs, 'cosine', 'binary', alphas=[float(val)/100 for val in range(95, 100, 5)], Qs=range(1,6), mnn=50)
 	
 
 	

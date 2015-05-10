@@ -83,46 +83,46 @@ class item_distance:
 if __name__ == '__main__':
 	dataset = dataset('kaggle_visible_evaluation_triplets_ts.txt')	
 	dist = item_distance(dataset, 'cosine', 'binary')
-	item_a = 384595
-	item_b = 254590
-	a = dataset.item_user_matrix['binary'][item_a]
-	b = dataset.item_user_matrix['binary'][item_b]
-	print a
-	print b
-	print dist.cosine(item_a, item_b)
-	print dist.cosine_binary(item_a, item_b)
+	# item_a = 384595
+	# item_b = 254590
+	# a = dataset.item_user_matrix['binary'][item_a]
+	# b = dataset.item_user_matrix['binary'][item_b]
+	# print a
+	# print b
+	# print dist.cosine(item_a, item_b)
+	# print dist.cosine_binary(item_a, item_b)
 	
 	
-	res1 = dist.nearestNeighboors(item_a)
+	# res1 = dist.nearestNeighboors(item_a)
 	
-	print len(res1)
-	print res1
+	# print len(res1)
+	# print res1
 	
-	# items = sorted(dataset.item_user_matrix['binary'].iterkeys())
-	# n = len(items)
+	items = sorted(dataset.item_user_matrix['binary'].iterkeys())
+	n = len(items)
 	
-	# sti = time.clock()
-	# i = 0
+	sti = time.clock()
+	i = 0
 	
-	# sumLengths = 0
-	# minLengths = 99999999
-	# maxLengths = 0
-	# for item in items:
+	sumLengths = 0
+	minLengths = 99999999
+	maxLengths = 0
+	for item in items:
 	
-		# i += 1
-		# if i % 100 == 00:
-			# cti = time.clock()
-			# t = cti - sti
-			# print "%d / %d) tot secs: %f (%f / item)"%(i, n, t,t/(i+1))
+		i += 1
+		if i % 100 == 00:
+			cti = time.clock()
+			t = cti - sti
+			print "%d / %d) tot secs: %f (%f / item)"%(i, n, t,t/(i+1))
 		
-		# nn = dist.nearestNeighboors(item)
-		# l = len(nn)
-		# sumLengths += l
-		# minLengths = min(l, minLengths)
-		# maxLengths = max(l, maxLengths)
-	# print sumLengths/len(items)
-	# print minLengths
-	# print maxLengths
+		nn = dist.nearestNeighboors(item)
+		l = len(nn)
+		sumLengths += l
+		minLengths = min(l, minLengths)
+		maxLengths = max(l, maxLengths)
+	print sumLengths/len(items)
+	print minLengths
+	print maxLengths
 	
 	
 	# a = {'s': 4.75, 't': 4.5, 'u': 5, 'v': 4.25, 'w': 4}
