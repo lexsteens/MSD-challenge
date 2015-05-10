@@ -2,6 +2,9 @@ import math
 
 class dataset:
 	def __init__(self, filename, user_item_constructions=['binary'], item_user_constructions=['binary']):
+		self.filename = filename
+		self.dir = "datasets/" + filename[:-7] + "/"
+		print self.dir
 	
 		self.user_item_constructions=user_item_constructions
 		self.item_user_constructions=item_user_constructions
@@ -21,7 +24,7 @@ class dataset:
 		
 		self.load_user_indexes()
 		self.load_item_indexes()
-		self.load_matrixes(filename)
+		self.load_matrixes()
 		
 		if 'norm' in self.user_item_constructions:
 			self.normalise_users()
@@ -37,7 +40,7 @@ class dataset:
 	
 	def load_user_indexes(self):
 		print 'loading user indexes...'
-		f = open('kaggle_users.txt', 'r')
+		f = open(self.dir + 'kaggle_users.txt', 'r')
 		i = 0
 		for line in f:
 			i += 1
@@ -51,7 +54,7 @@ class dataset:
 	
 	def load_item_indexes(self):
 		print 'loading item indexes...'
-		f = open('kaggle_songs.txt', 'r')
+		f = open(self.dir + 'kaggle_songs.txt', 'r')
 		for line in f:
 			item, i = line.strip().split(" ")
 			i = int(i)
@@ -62,9 +65,9 @@ class dataset:
 		
 	
 	
-	def load_matrixes(self, filename):
+	def load_matrixes(self):
 		print 'loading evaluation triplets...'
-		f = open(filename, 'r')
+		f = open(self.dir + self.filename, 'r')
 
 		for line in f:
 			user, item, count = line.strip().split('\t')

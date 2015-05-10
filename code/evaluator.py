@@ -5,6 +5,7 @@ from dataset import dataset
 class evaluator:
 	def __init__(self, dataset, K, filename):
 		self.dataset = dataset
+		self.dir = self.dataset.dir
 		self.filename = filename
 		vs = dataset.user_item_matrix['count']
 		
@@ -32,7 +33,7 @@ class evaluator:
 	
 	
 	def save_details(self):
-		with open(self.filename, 'w') as f:
+		with open(self.dir + self.filename, 'w') as f:
 			f.write(' '.join(['all', str(self.get_MAP())]) + "\n")
 			for user, value in self.average_precision.items():
 				f.write(' '.join([str(user), str(value)]) + "\n")
