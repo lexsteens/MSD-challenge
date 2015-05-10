@@ -15,7 +15,7 @@ i = 0
 for line in f:
 	i += 1
 	if i % 1000000 == 0:
-		print i
+		print "Read", i
 	user, song, count = line.strip().split('\t')
 	
 	if user not in u2i:
@@ -31,10 +31,14 @@ dirname = "datasets/" + ds_name + "/"
 filename = dirname + ds_name + ".txt"
 os.makedirs(dirname)
 f = open(filename, 'w')
+i = 0
 for user in kaggle_users:
 	for song in u2i[user]:
+		i += 1
+		if i % 1000000 == 0:
+			print "Write", i
 		kaggle_songs.add(song)
-		f.write('\t'.join([user, song, count]) + '\n')
+		f.write('\t'.join([user, song, u2i[user][song]]) + '\n')
 f.close()
 kaggle_songs = list(kaggle_songs)
 

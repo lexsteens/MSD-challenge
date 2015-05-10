@@ -3,6 +3,9 @@ from dataset import dataset
 from user_distance import user_distance
 import time
 import json
+import sys
+
+ds_name = sys.argv[1]
 
 global_debug_info = {}
 
@@ -67,7 +70,7 @@ def recommend_users(dataset_ts, dataset_vs, method, construction, alphas=[0.5], 
 		
 		evaluators = []
 		for q in Qs:
-			filename = "MAP_" + method + "_" + construction + "_alpha=" + str(alpha) + "_mnn=" + str(mnn)+ "_q=" + str(q) + ".txt"
+			filename = "MAP_ucf_" + method + "_" + construction + "_alpha=" + str(alpha) + "_mnn=" + str(mnn)+ "_q=" + str(q) + ".txt"
 			print filename
 			ev = evaluator(dataset_vs, 500, filename)
 			evaluators.append(ev)
@@ -95,9 +98,9 @@ def recommend_users(dataset_ts, dataset_vs, method, construction, alphas=[0.5], 
 			
 		
 if __name__ == '__main__':
-	dataset_ts = dataset('kaggle_visible_evaluation_triplets_ts.txt', user_item_constructions=['binary'])	
-	dataset_vs = dataset('kaggle_visible_evaluation_triplets_vs.txt', user_item_constructions=['count'], item_user_constructions=[])
-	recommend_users(dataset_ts, dataset_vs, 'cosine', 'binary', alphas=[float(val)/100 for val in range(75, 80, 5)], Qs=range(1, 2), mnn=50)
+	dataset_ts = dataset(ds_name + '_ts.txt', user_item_constructions=['binary'])	
+	dataset_vs = dataset(ds_name + '_vs.txt', user_item_constructions=['count'], item_user_constructions=[])
+	recommend_users(dataset_ts, dataset_vs, 'cosine', 'binary', alphas=[float(val)/100 for val in range(0, 105, 5)], Qs=range(1, 6), mnn=50)
 	
 
 	

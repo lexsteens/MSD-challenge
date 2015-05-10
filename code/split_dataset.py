@@ -1,6 +1,9 @@
+import sys
 
+ds_name = sys.argv[1]
+dirname = "datasets/" + ds_name + "/"
 
-f = open('kaggle_visible_evaluation_triplets.txt', 'r')
+f = open(dirname + ds_name + '.txt', 'r')
 user_to_songs = {}
 for line in f:
 	user, song, count = line.strip().split('\t')
@@ -12,8 +15,8 @@ for line in f:
 f.close()
 
 
-ts = open('kaggle_visible_evaluation_triplets_ts.txt', 'w')
-vs = open('kaggle_visible_evaluation_triplets_vs.txt', 'w')
+ts = open(dirname + ds_name + '_ts.txt', 'w')
+vs = open(dirname + ds_name + '_vs.txt', 'w')
 for user in user_to_songs:
 	l = len(user_to_songs[user])
 	if l >= 0:
