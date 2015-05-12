@@ -101,7 +101,7 @@ if __name__ == '__main__':
 	ds_name = sys.argv[1]
 	construction = sys.argv[2]
 
-	dataset_ts = dataset(ds_name + '_ts.txt', user_item_constructions=[construction])	
+	dataset_ts = dataset(ds_name + '_ts.txt', user_item_constructions=[construction], item_user_constructions=[construction])	
 	dataset_vs = dataset(ds_name + '_vs.txt', user_item_constructions=['count'], item_user_constructions=[])
 	recommend_users(dataset_ts, dataset_vs, 'cosine', construction, alphas=[float(val)/100 for val in range(0, 105, 5)], Qs=range(1,6), mnn=50)
 	

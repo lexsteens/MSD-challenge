@@ -17,6 +17,9 @@ class user_distance:
 		if method == 'cosine':
 			self.distance_method = self.cosine_binary if construction == 'binary' else self.cosine
 			self.distance_type = 'similarity'
+		if method == 'inter':
+			self.distance_method = self.inter
+			self.distance_type = 'similarity'
 		
 
 	
@@ -79,6 +82,12 @@ class user_distance:
 			# print b
 			# print alpha, self.user_length[user_a], math.pow(self.user_length[user_a], self.alpha), self.user_length[user_b], math.pow(self.user_length[user_b], self.alpha), dot_a_b, dist
 		return dist
+		
+	
+	
+	
+	def inter(self, a, b, user_a, user_b):
+		return len(set(a) & set(b))
 		
 
 if __name__ == '__main__':

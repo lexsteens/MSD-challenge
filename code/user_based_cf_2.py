@@ -4,6 +4,7 @@ from user_distance import user_distance
 import time
 import json
 import sys
+import math
 
 
 
@@ -21,46 +22,23 @@ class user_based_cf_recommender:
 	def recommend_user(self, user):
 		similar_users = self.distances.nearestNeighboors(user)[:self.mnn]
 		
-		# user_to_debug = 'c34670d9c1718361feb93068a853cead3c95b76a'
-
-		# user_name = self.dataset.index2user[user]
-		# if user_name == user_to_debug:
-			# debug_info = {
-				# self.dataset.index2user[user]: dict([(self.dataset.index2item[item], value) for item, value in self.dataset.user_item_matrix['count'][user].items()])
-				# , 'similar_users': {}
-				# }
-		
 		recs = []
 		for q in self.Qs:		
 			ranking = {}
 			for similar_user, dist in similar_users:
 				
-				# if user_name == user_to_debug:
-					# similar_user_name = self.dataset.index2user[similar_user]
-					# debug_info['similar_users'][similar_user_name] = {}
-					# debug_info['similar_users'][similar_user_name]['dist'] = dist
-					# debug_info['similar_users'][similar_user_name]['songs'] = {}
-				
 				for item in self.dataset.user_item_matrix[self.construction][similar_user]:
-					if self.dataset.user_item_matrix['count'][similar_user] > 1:
-						
-						# if user_name == user_to_debug:
-							# item_id = self.dataset.index2item[item]
-							# debug_info['similar_users'][similar_user_name]['songs'][item_id] = self.dataset.user_item_matrix['count'][similar_user][item]
-						
-						if item not in self.dataset.user_item_matrix[self.construction][user]:
-							if  item not in ranking:
-								ranking[item] = 0
-							ranking[item] += pow(dist, q)
+					
+					if item not in self.dataset.user_item_matrix[self.construction][user]:
+						if item not in ranking:
+							ranking[item] = 0
+						ranking[item] += pow(dist * math.log(self.dataset.user_item_matrix['count'][similar_user][item]), q)
 			
 			rec = [(tuple[0], tuple[1], idx) for idx, tuple in enumerate(sorted(ranking.items(), key=lambda x: x[1], reverse=True))]
 			recs.append(rec)
 		
-		# if user_name == user_to_debug:
-			# debug_info['ranking'] = [self.dataset.index2item[item] + '(' + str(score) + ')[' + str(rank) + ']' for item, score, rank in rec]
-			# global_debug_info['recommender'] = debug_info
-		
 		return recs
+		
 		
 
 def recommend_users(dataset_ts, dataset_vs, method, construction, alphas=[0.5], Qs=[3], mnn=500):
@@ -102,10 +80,11 @@ if __name__ == '__main__':
 
 	ds_name = sys.argv[1]
 	construction = sys.argv[2]
+	method = sys.argv[3]
 
-	dataset_ts = dataset(ds_name + '_ts.txt', user_item_constructions=['binary', 'count'])	
+	dataset_ts = dataset(ds_name + '_ts.txt', user_item_constructions=[construction, 'count'])	
 	dataset_vs = dataset(ds_name + '_vs.txt', user_item_constructions=['count'], item_user_constructions=[])
-	recommend_users(dataset_ts, dataset_vs, 'cosine', 'binary', alphas=[float(val)/100 for val in range(0, 105, 5)], Qs=range(1, 2), mnn=50)
+	recommend_users(dataset_ts, dataset_vs, method, construction, alphas=[float(val)/100 for val in range(0, 105, 5)], Qs=range(1, 2), mnn=50)
 	
 
 	
