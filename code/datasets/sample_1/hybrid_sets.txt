@@ -1,0 +1,1 @@
+set1	MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.subm MAP_icf_cosine_binary_alpha=0.8_mnn=50_q=1.subm
