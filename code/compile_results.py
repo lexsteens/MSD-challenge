@@ -21,6 +21,8 @@ result_files = [f for f in text_files if f not in exclude_files]
 results = {}
 
 for file in result_files:
+	if not filter in file:
+		continue
 	ev_meth, algo, method, construction, alpha, mnn, q = file[:-4].split('_')
 	alpha = "%.2f" % float(alpha.split('=')[1])
 	q = q.split('=')[1]
@@ -53,8 +55,6 @@ for ev_meth in results:
 	for algo in results[ev_meth]:
 		for method in results[ev_meth][algo]:
 			for construction in results[ev_meth][algo][method]:
-				if not filter in algo + method + construction:
-					continue
 				for mnn in results[ev_meth][algo][method][construction]:
 					current = results[ev_meth][algo][method][construction][mnn]
 					print '---------------------------------------------\n'
