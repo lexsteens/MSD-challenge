@@ -3,11 +3,17 @@ import datetime
 from dataset import dataset
 
 class evaluator:
-	def __init__(self, dataset, K, filename):
+	def __init__(self, dataset, K, filename, subm=False):
 		self.dataset = dataset
 		self.dir = self.dataset.dir
 		self.filename = filename
 		vs = dataset.user_item_matrix['count']
+		
+		
+		self.subm = subm
+		if self.subm:
+			self.filename_subm = filename.replace('.txt', '.subm')
+			self.subm_f = open(self.dir + self.filename_subm, 'w')
 		
 		# print len(vs)
 		# print vs[65537]
@@ -22,10 +28,8 @@ class evaluator:
 		self.vs = vs
 		self.vs_ranked = vs_ranked
 		self.K = K
-		self.sumAveP = 0.
-		self.numUsers = 0
 		
-		self.average_precision = {}
+		self.results = {}
 		
 		print "evaluator ready."
 			
@@ -34,52 +38,73 @@ class evaluator:
 	
 	def save_details(self):
 		with open(self.dir + self.filename, 'w') as f:
-			f.write(' '.join(['all', str(self.get_MAP())]) + "\n")
-			for user, value in self.average_precision.items():
-				f.write(' '.join([str(user), str(value)]) + "\n")
+			f.write(' '.join(['MAP', str(self.get_MAP())]) + "\n")
+			f.write(' '.join(['MrecR', str(self.get_MrecR())]) + "\n")
+			for user, result in self.results.items():
+				aveP = "%.4f" % result['aveP']
+				recRank = "%.4f" % result['recRank']
+				corrects = ' '.join([str(item) + '@' + str(rank) for item, rank in result['corrects']])
+				f.write(' '.join([str(user).ljust(10), aveP, recRank]) + '\t' + corrects + "\n")
 			
 	
 	
 		
 	def get_MAP(self):
-		return reduce(lambda x, y: x+y, [value for item, value in self.average_precision.items()]) / len(self.average_precision)
+		return reduce(lambda x, y: x+y, [result['aveP'] for user, result in self.results.items()]) / len(self.results)
+		
+		
+		
+	def get_MrecR(self):
+		return reduce(lambda x, y: x+y, [result['recRank'] for user, result in self.results.items()]) / len(self.results)
 		
 		
 		
 		
 		
-	def add_ranking(self, user, ranking):
-		ranking = [item for item, score, rank in ranking]
+	def add_ranking(self, user, full_ranking):
+		ranking = [item for item, score, rank in full_ranking]
 		ranking_vs = self.vs_ranked[user]
 		
-		self.average_precision[user] = self.aveP(ranking, ranking_vs, user)
+		self.results[user] = self.aveP(ranking, ranking_vs, user)
+		
+		if self.subm:
+			self.subm_f.write(str(user).ljust(10) + '\t' + ' '.join([str(item) + ':' + str(round(score, 4)) + ':' + str(rank + 1) for item, score, rank in full_ranking]) + '\n')
 
 		
 		
 		
 	def aveP(self, ranking, ranking_vs, user):
 		# print user
-		level = 0
+		rank = 0
 		correct_items = 0.
 		sumPrec = 0.
+		first = 0
+		corrects = []
 		
 		for item in ranking[:self.K]:
-			level += 1
+			rank += 1
 			
 			if item in ranking_vs:
 				correct_items += 1
-				prec = correct_items / level
-				# print "Precision @", level, ":", prec, '(', self.dataset.index2item[item], ')'
+				corrects.append((item, rank))
+				
+				prec = correct_items / rank
+				# print "Precision @", rank, ":", prec, '(', self.dataset.index2item[item], ')'
 				sumPrec += prec
+				
+				if first == 0:
+					first = rank
 		
 		denom = min(correct_items, self.K)
 		# if denom == 0:
 			# print "Denom = 0 for user:", user, self.dataset.index2user[user], denom
-		res  = sumPrec / denom if denom > 0 else 0
+		aveP  = sumPrec / denom if denom > 0 else 0
+		recRank = 1. / first if first > 0 else 0
 		
-		# print "Average Precision @", self.K, ":", res
+		# print "Average Precision @", self.K, ":", aveP
+		# print "Reciprocal Rank : ", recRank
 		
-		return res
+		return {'aveP': aveP, 'recRank': recRank, 'corrects': corrects}
 		
 		
 	

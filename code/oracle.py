@@ -15,10 +15,13 @@ class oracle_recommender:
 
 		
 if __name__ == '__main__':
+
+	
+
 	dataset_vs = dataset('kaggle_visible_evaluation_triplets_vs.txt')
 	recommender = oracle_recommender(dataset_vs)
 	
-	evaluator = evaluator(dataset_vs, 500)
+	evaluator = evaluator(dataset_vs, 500, 'oracle', subm=True)
 	
 	
 	# print recommender.recommend(65537)

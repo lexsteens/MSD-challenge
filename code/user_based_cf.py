@@ -62,7 +62,7 @@ class user_based_cf_recommender:
 		return recs
 		
 
-def recommend_users(dataset_ts, dataset_vs, method, construction, alphas=[0.5], Qs=[3], mnn=500):
+def recommend_users(dataset_ts, dataset_vs, method, construction, alphas=[0.5], Qs=[3], mnn=500, subm=False):
 	print "alphas: ", alphas
 	print "Qs: ", Qs
 	for alpha in alphas:
@@ -72,7 +72,7 @@ def recommend_users(dataset_ts, dataset_vs, method, construction, alphas=[0.5], 
 		for q in Qs:
 			filename = "MAP_ucf_" + method + "_" + construction + "_alpha=" + str(alpha) + "_mnn=" + str(mnn)+ "_q=" + str(q) + ".txt"
 			print filename
-			ev = evaluator(dataset_vs, 500, filename)
+			ev = evaluator(dataset_vs, 500, filename, subm=subm)
 			evaluators.append(ev)
 		
 		recommender = user_based_cf_recommender(dataset_ts, distances, Qs=Qs, mnn=mnn)
@@ -101,10 +101,12 @@ if __name__ == '__main__':
 
 	ds_name = sys.argv[1]
 	construction = sys.argv[2]
+	method = sys.argv[3]
 	
 	dataset_ts = dataset(ds_name + '_ts.txt', user_item_constructions=[construction])	
 	dataset_vs = dataset(ds_name + '_vs.txt', user_item_constructions=['count'], item_user_constructions=[])
-	recommend_users(dataset_ts, dataset_vs, 'cosine', construction, alphas=[float(val)/100 for val in range(0, 105, 5)], Qs=range(1, 3), mnn=50)
+	# recommend_users(dataset_ts, dataset_vs, method, construction, alphas=[float(val)/100 for val in range(0, 105, 5)], Qs=range(1, 1), mnn=50)
+	recommend_users(dataset_ts, dataset_vs, method, construction, alphas=[0.30], Qs=[1], mnn=50, subm=True)
 	
 
 	
