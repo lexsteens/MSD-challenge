@@ -69,6 +69,50 @@
 \begin_body
 
 \begin_layout Section*
+Problem Statement
+\end_layout
+
+\begin_layout Section*
+Overview of possible methods
+\end_layout
+
+\begin_layout Subsection*
+Content based
+\end_layout
+
+\begin_layout Subsection*
+Context based
+\end_layout
+
+\begin_layout Subsection*
+Collaborative Filtering
+\end_layout
+
+\begin_layout Subsubsection*
+Model Based
+\end_layout
+
+\begin_layout Subsubsection*
+Memory Based
+\end_layout
+
+\begin_layout Subsection*
+Hybrid Methodologies
+\end_layout
+
+\begin_layout Subsubsection*
+Monolithic
+\end_layout
+
+\begin_layout Subsubsection*
+Parallel
+\end_layout
+
+\begin_layout Subsubsection*
+Pipelined
+\end_layout
+
+\begin_layout Section*
 Performance evaluation
 \end_layout
 
@@ -195,6 +239,26 @@ Precision @380: 0.02105
 
 \begin_layout LyX-Code
 Average Precision @500: 0.5071 / 8 = 0.06339
+\end_layout
+
+\begin_layout Section*
+Datasets
+\end_layout
+
+\begin_layout Section*
+Choosen approach
+\end_layout
+
+\begin_layout Section*
+Results
+\end_layout
+
+\begin_layout Section*
+conclusion & Future Work
+\end_layout
+
+\begin_layout Part*
+ANNEXES
 \end_layout
 
 \end_body
