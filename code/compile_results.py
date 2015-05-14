@@ -15,7 +15,8 @@ exclude_files = [
 ]
 
 only_files = [f for f in listdir(dirname) if isfile(join(dirname, f))]
-result_files = [f for f in only_files if f not in exclude_files]
+text_files = [f for f in only_files if f.endswith('.txt')]
+result_files = [f for f in text_files if f not in exclude_files]
 
 results = {}
 
@@ -35,9 +36,17 @@ for file in result_files:
 		results[ev_meth][algo][method][construction][mnn] = {}
 	if alpha not in results[ev_meth][algo][method][construction][mnn]:
 		results[ev_meth][algo][method][construction][mnn][alpha] = {}
+	if q not in results[ev_meth][algo][method][construction][mnn][alpha]:
+		results[ev_meth][algo][method][construction][mnn][alpha][q] = {}
 		
 	f = open(join(dirname, file), 'r')
-	results[ev_meth][algo][method][construction][mnn][alpha][q] = float(f.readline().rstrip().split(' ')[1])
+	fields = f.readline().rstrip().split(' ')
+	results[ev_meth][algo][method][construction][mnn][alpha][q]['MAP'] = float(fields[1])
+	fields = f.readline().rstrip().split(' ')
+	if fields[0] == 'MrecR':
+		results[ev_meth][algo][method][construction][mnn][alpha][q]['MrecR'] = float(fields[1])
+	else:
+		results[ev_meth][algo][method][construction][mnn][alpha][q]['MrecR'] = 0.0
 	f.close()
 
 for ev_meth in results:
@@ -52,7 +61,7 @@ for ev_meth in results:
 					print ev_meth, algo, method, construction, mnn, ':\n'
 					print '---------------------------------------------\n'
 					Qs = sorted(current[current.keys()[0]])
-					print '\t' + '\t  '.join(Qs) + '\n'
+					print '\t' + '             '.join(Qs) + '\n'
 					for alpha in sorted(current):
-						print alpha + '\t' + '\t'.join(["%.4f" % current[alpha][q] for q in Qs]) + '\n'
+						print alpha + '\t' + '  '.join(["%.4f(%.4f)" % (current[alpha][q]['MAP'],current[alpha][q]['MrecR'])  for q in Qs]).replace('0.', '.') + '\n'
 						
