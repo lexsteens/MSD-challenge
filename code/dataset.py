@@ -31,10 +31,10 @@ class dataset:
 		if 'tfidf' in self.user_item_constructions:
 			self.tfidf_users()
 			
-		# if 'norm' in self.item_user_constructions:
-			# self.normalise_items()
-		# if 'tfidf' in self.item_user_constructions:
-			# self.tfidf_items()	
+		if 'norm' in self.item_user_constructions:
+			self.normalise_items()
+		if 'tfidf' in self.item_user_constructions:
+			self.tfidf_items()	
 			
 			
 	
@@ -108,22 +108,19 @@ class dataset:
 				self.item_user_matrix['count'][item_index][user_index] = count
 			if 'binary' in self.item_user_constructions:
 				self.item_user_matrix['binary'][item_index][user_index] = 1
-			# if 'norm' in self.item_user_constructions:
-				# self.item_user_matrix['norm'][item_index][user_index] = count
-			# if 'tfidf' in self.item_user_constructions:
-				# self.item_user_matrix['tfidf'][item_index][user_index] = count
+			if 'norm' in self.item_user_constructions:
+				self.item_user_matrix['norm'][item_index][user_index] = count
+			if 'tfidf' in self.item_user_constructions:
+				self.item_user_matrix['tfidf'][item_index][user_index] = count
 	
 	
 	def normalise_users(self):
 		u2i = self.user_item_matrix['norm']
 		for user in u2i:
-			# if user == 32500:
-				# print u2i[user]
 			norm = math.sqrt(sum([count * count for count in u2i[user].values()]))
 			for item in u2i[user]:
 				u2i[user][item] = float(u2i[user][item]) / norm
-			# if user == 32500:
-				# print u2i[user]
+
 	
 	
 	def tfidf_users(self):
@@ -143,16 +140,43 @@ class dataset:
 		# calculate normalized tfidf weights:
 		u2i = self.user_item_matrix['tfidf']
 		for user in u2i:
-			# if user == 32500:
-				# print u2i[user]
 			# the norm is the square root of term frequencies:
 			norm = math.sqrt(sum([count * count for count in u2i[user].values()]))
 			for item in u2i[user]:
 				u2i[user][item] = float(u2i[user][item]) * idf[item] / norm
-			# if user == 32500:
-				# print u2i[user]
+
+	
+	def normalise_items(self):
+		i2u = self.item_user_matrix['norm']
+		for item in i2u:
+			norm = math.sqrt(sum([count * count for count in i2u[item].values()]))
+			for user in i2u[item]:
+				i2u[item][user] = float(i2u[item][user]) / norm
+
 	
 	
+	def tfidf_items(self):
+	
+		# number of documents (users):
+		N = len(self.item_user_matrix['tfidf'])
+	
+		idf = {}
+		# use a item_user_matrix to calculate document (user) frequencies:
+		u2i = self.user_item_matrix[self.user_item_constructions[0]]
+		for user in u2i:
+			df = len(set(u2i[user]))
+			idf[user] = math.log(N/df, 10)
+		
+		# calculate normalized tfidf weights:
+		i2u = self.item_user_matrix['tfidf']
+		for item in i2u:
+			# the norm is the square root of term frequencies:
+			norm = math.sqrt(sum([count * count for count in i2u[item].values()]))
+			for user in i2u[item]:
+				i2u[item][user] = float(i2u[item][user]) * idf[user] / norm
+				
+				
+				
 	
 if __name__ == '__main__':
 

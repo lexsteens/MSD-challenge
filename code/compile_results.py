@@ -4,6 +4,7 @@ from os.path import isfile, join
 
 ds_name = sys.argv[1]
 dirname = "datasets/" + ds_name
+filter = sys.argv[2]
 
 exclude_files = [
 	'kaggle_songs.txt',
@@ -43,6 +44,8 @@ for ev_meth in results:
 	for algo in results[ev_meth]:
 		for method in results[ev_meth][algo]:
 			for construction in results[ev_meth][algo][method]:
+				if not filter in algo + method + construction:
+					continue
 				for mnn in results[ev_meth][algo][method][construction]:
 					current = results[ev_meth][algo][method][construction][mnn]
 					print '---------------------------------------------\n'
