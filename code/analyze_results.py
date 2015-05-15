@@ -1,36 +1,103 @@
 from dataset import dataset
 import numpy as np
 import matplotlib.pyplot as plt
+import sys
 
-a = [1, 2]
-print np.mean(a)
+ds_name = "sample_1"
+dir_name = "datasets/%s"%(ds_name)
+print dir_name
 
-dataset_ts = dataset('kaggle_visible_evaluation_triplets_ts.txt', user_item_constructions=['count'])
+# dataset_ts = dataset("%s_ts.txt"%(ds_name))
 
-MAP = {}
-with open('datasets/kaggle_visible_evaluation_triplets/MAP_cosine_binary_alpha=0.8_q=1.txt', 'r') as f:
-	for line in f:
-		user_idx, value = line.strip().split(' ')
-		if user_idx != 'all':
-			MAP[int(user_idx)] = float(value)
+# Loading history lengths:
+# ------------------------
+user_history_length = {}
+f = open("%s/user_history_lengths.txt"%(dir_name), 'r')
+for line in f.readlines():
+	user, length = line.strip().split(' ')
+	user_history_length[int(user)] = int(length)
+f.close()
+
+# Create length history distribution:
+users_with_history_length = {}		
+for user, history_length in user_history_length.items():	
+	if history_length not in users_with_history_length:
+		users_with_history_length[history_length] = []
+	users_with_history_length[history_length].append(user)
+
+history_lengths = sorted(users_with_history_length.keys())
+history_length_dist = []
+for history_length in history_lengths:
+	history_length_dist.append(len(users_with_history_length[history_length]))
 
 
-length_distribution = {}		
-for user_idx, value in MAP.items():
-	history_length = len(dataset_ts.user_item_matrix['count'][user_idx])
-	user = dataset_ts.index2user[user_idx]
+# Start plotting:
+fig, ax1 = plt.subplots()
+ax1.plot(history_lengths, history_length_dist, 'gs-')
+ax1.set_ylabel('number of users', color='g')
+ax1.set_xlabel('history length')
+for tl in ax1.get_yticklabels():
+	tl.set_color('g')
 	
-	# if history_length == 10:
-		# print user_idx
+
+# Loading evaluations:
+# --------------------
+MAP_dist = {}
+for file in ["MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.txt", "MAP_icf_cosine_binary_alpha=0.8_mnn=50_q=1.txt", "MAP_icf_cosine_binary_alpha=0.8_mnn=500_q=1.txt", "MAP_popularity.txt"]:
+	avePs_for_history_length = [[] for i in range(len(history_lengths))]
+	with open("%s/%s"%(dir_name, file), 'r') as f:
+		for line in f:
+			if line.startswith('all') or line.startswith('MAP') or line.startswith('MrecR'):
+				continue
+			
+			if line.find('\t') == -1:
+				user, aveP = line.strip().split(' ')
+				user, aveP = (int(user), float(aveP))
+			else:
+				user = int(line[:11])
+				aveP = float(line[12:17])
+				MrecR = float(line[19:24])
+			
+			history_length = user_history_length[user]
+			idx = history_lengths.index(history_length)
+			avePs_for_history_length[idx].append(aveP)
 	
-	if history_length not in length_distribution:
-		length_distribution[history_length] = []
-	length_distribution[history_length].append(value)
+	# print avePs_for_history_length[48]
+	MAP_dist[file] = []
+	for idx, avePs in enumerate(avePs_for_history_length):
+		MAP_dist[file].append(np.mean(avePs))
+	
+
+
+
+	
+
+	
+ax2 = ax1.twinx()
+ax2.plot(history_lengths, MAP_dist['MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.txt'], 'b^-')
+ax2.plot(history_lengths, MAP_dist['MAP_icf_cosine_binary_alpha=0.8_mnn=50_q=1.txt'], 'y^-')
+ax2.plot(history_lengths, MAP_dist['MAP_popularity.txt'], 'r^-')
+ax2.set_ylabel('MAP', color='b')
+for tl in ax2.get_yticklabels():
+	tl.set_color('b')
+	
+plt.show()
+	
+sys.exit()
+
+
+
+
+
+
+
+
+
 
 MAP_by_history_length = {}
 dist_of_history_length = {}
 aveP_at_zero_by_history_length = {}
-for history_length, avePs in length_distribution.items():
+for history_length, avePs in users_with_history_length.items():
 	MAP_by_history_length[history_length] = np.mean(avePs)
 	dist_of_history_length[history_length] = len(avePs)
 	aveP_at_zero_by_history_length[history_length] = len([x for x in avePs if x == 0])

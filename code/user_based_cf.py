@@ -102,10 +102,11 @@ if __name__ == '__main__':
 	ds_name = sys.argv[1]
 	construction = sys.argv[2]
 	method = sys.argv[3]
+	mnn = int(sys.argv[4])
 	
 	dataset_ts = dataset(ds_name + '_ts.txt', user_item_constructions=[construction])	
 	dataset_vs = dataset(ds_name + '_vs.txt', user_item_constructions=['count'], item_user_constructions=[])
-	recommend_users(dataset_ts, dataset_vs, method, construction, alphas=[float(val)/100 for val in range(0, 105, 5)], Qs=range(1, 3), mnn=50)
+	recommend_users(dataset_ts, dataset_vs, method, construction, alphas=[float(val)/100 for val in range(30, 35, 5)], Qs=range(1, 2), mnn=mnn)
 	# recommend_users(dataset_ts, dataset_vs, method, construction, alphas=[0.30], Qs=[1], mnn=50, subm=True)
 	
 
