@@ -51,6 +51,10 @@ code/*.txt
 report/#*#
 code/datasets/train_triplets.txt
 code/datasets/kaggle_visible_evaluation_triplets/kaggle*
+code/datasets/kaggle_visible_evaluation_triplets/*.subm
 code/datasets/sample_1/sample_1*
 code/datasets/sample_1/kaggle*
 code/datasets/sample_1/*.subm
+code/datasets/sample_2/sample_2*
+code/datasets/sample_2/kaggle*
+code/datasets/sample_2/*.subm
