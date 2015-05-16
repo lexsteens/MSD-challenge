@@ -219,51 +219,75 @@ Hybrid Methodologies
 \end_layout
 
 \begin_layout Standard
-Different approaches can be used to use
+Different approaches can be used to combine the results of the several recommend
+ation strategies into one, in an atempt to get higher recommendation performance
+s.
+ Those hybridization mothods can be classified as follow:
 \end_layout
 
 \begin_layout Itemize
+
+\noun on
 Monolithic
+\noun default
+: creates a single recommendation component, using a complexe recommending
+ algorithm in its cores:
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
+
+\noun on
 Feature Combination
+\noun default
+: combines the scores of several scoring algorithms into one score used
+ to rank the songs
 \end_layout
 
 \end_deeper
 \begin_layout Itemize
-Parallel
+
+\noun on
+Parallel: 
+\noun default
+uses two or more simple ranking algorithms and creates a higher level ranking
+ for recommendation:
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
-Weighting
+
+\noun on
+Weighting: 
 \end_layout
 
 \begin_layout Itemize
+
+\noun on
 Switching
 \end_layout
 
 \end_deeper
 \begin_layout Itemize
+
+\noun on
 Pipelined
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
+
+\noun on
 Cascade
 \end_layout
 
 \begin_layout Itemize
+
+\noun on
 Meta-Level
 \end_layout
 
 \end_deeper
-\begin_layout Subsubsection*
-
-\end_layout
-
 \begin_layout Section*
 Performance evaluation
 \end_layout
