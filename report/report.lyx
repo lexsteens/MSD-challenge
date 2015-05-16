@@ -68,8 +68,40 @@
 
 \begin_body
 
+\begin_layout Title
+Case Study: Kaggle MSD challenge competition
+\end_layout
+
 \begin_layout Section*
 Problem Statement
+\end_layout
+
+\begin_layout Standard
+Given:
+\end_layout
+
+\begin_layout Enumerate
+The full listening history for 1M users 
+\end_layout
+
+\begin_layout Enumerate
+half of the listening history for 110K users (called the visible listening
+ history),
+\end_layout
+
+\begin_layout Standard
+propose a ranked list of 500 songs per user, in decreasing probability of
+ this particular user listening to that song.
+\end_layout
+
+\begin_layout Standard
+The results will be evaluated using the Mean Average Precision (truncated
+ at 500) of the proposed ranking against the second half of the 110K users
+ listening history.
+ This second half of the listening history was not available to the competitors,
+ which needed to send their proposition and receive in return the result
+ of the Mean Average Precision through a web interface hosted at Kaggle.
+ 
 \end_layout
 
 \begin_layout Section*
