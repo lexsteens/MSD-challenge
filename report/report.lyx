@@ -441,7 +441,7 @@ Results
 \end_layout
 
 \begin_layout Standard
-b
+
 \end_layout
 
 \begin_layout Standard
@@ -452,9 +452,9 @@ status open
 
 Table 
 \backslash
-ref{table:MAP_icf_cosine_binary_mnn=50} on page 
+ref{table:MAP_Dataset_2_icf_cosine_binary_mnn=50} on page 
 \backslash
-pageref{table:MAP_icf_cosine_binary_mnn=50}
+pageref{table:MAP_Dataset_2_icf_cosine_binary_mnn=50}
 \end_layout
 
 \end_inset
@@ -463,7 +463,7 @@ pageref{table:MAP_icf_cosine_binary_mnn=50}
 \end_layout
 
 \begin_layout Section*
-conclusion & Future Work
+Conclusion & Future Work
 \end_layout
 
 \begin_layout Standard
@@ -559,7 +559,7 @@ textbf{q=5}
 \backslash
 hline 
 \backslash
-textbf{0.00} & 0.0123 & 0.0097 & 0.0094 & 0.0094 & 0.0094
+textbf{0.00} & 0.0705 & 0.0618 & 0.0570 & 0.0552 & 0.0547
 \backslash
 
 \backslash
@@ -567,7 +567,7 @@ textbf{0.00} & 0.0123 & 0.0097 & 0.0094 & 0.0094 & 0.0094
 \backslash
 hline 
 \backslash
-textbf{0.05} & 0.0179 & 0.0140 & 0.0143 & 0.0153 & 0.0163
+textbf{0.05} & 0.0720 & 0.0630 & 0.0581 & 0.0561 & 0.0553
 \backslash
 
 \backslash
@@ -575,7 +575,7 @@ textbf{0.05} & 0.0179 & 0.0140 & 0.0143 & 0.0153 & 0.0163
 \backslash
 hline 
 \backslash
-textbf{0.10} & 0.0197 & 0.0164 & 0.0173 & 0.0185 & 0.0195
+textbf{0.10} & 0.0725 & 0.0638 & 0.0588 & 0.0562 & 0.0552
 \backslash
 
 \backslash
@@ -583,7 +583,7 @@ textbf{0.10} & 0.0197 & 0.0164 & 0.0173 & 0.0185 & 0.0195
 \backslash
 hline 
 \backslash
-textbf{0.15} & 0.0237 & 0.0197 & 0.0200 & 0.0203 & 0.0206
+textbf{0.15} & 0.0732 & 0.0651 & 0.0591 & 0.0565 & 0.0553
 \backslash
 
 \backslash
@@ -591,7 +591,7 @@ textbf{0.15} & 0.0237 & 0.0197 & 0.0200 & 0.0203 & 0.0206
 \backslash
 hline 
 \backslash
-textbf{0.20} & 0.0306 & 0.0250 & 0.0238 & 0.0235 & 0.0235
+textbf{0.20} & 0.0738 & 0.0658 & 0.0595 & 0.0569 & 0.0556
 \backslash
 
 \backslash
@@ -599,7 +599,7 @@ textbf{0.20} & 0.0306 & 0.0250 & 0.0238 & 0.0235 & 0.0235
 \backslash
 hline 
 \backslash
-textbf{0.25} & 0.0467 & 0.0360 & 0.0323 & 0.0307 & 0.0301
+textbf{0.25} & 0.0748 & 0.0671 & 0.0610 & 0.0577 & 0.0557
 \backslash
 
 \backslash
@@ -607,7 +607,7 @@ textbf{0.25} & 0.0467 & 0.0360 & 0.0323 & 0.0307 & 0.0301
 \backslash
 hline 
 \backslash
-textbf{0.30} & 0.0691 & 0.0509 & 0.0438 & 0.0410 & 0.0395
+textbf{0.30} & 0.0755 & 0.0681 & 0.0618 & 0.0577 & 0.0559
 \backslash
 
 \backslash
@@ -615,7 +615,7 @@ textbf{0.30} & 0.0691 & 0.0509 & 0.0438 & 0.0410 & 0.0395
 \backslash
 hline 
 \backslash
-textbf{0.35} & 0.0899 & 0.0661 & 0.0562 & 0.0519 & 0.0497
+textbf{0.35} & 0.0759 & 0.0689 & 0.0618 & 0.0584 & 0.0560
 \backslash
 
 \backslash
@@ -623,7 +623,7 @@ textbf{0.35} & 0.0899 & 0.0661 & 0.0562 & 0.0519 & 0.0497
 \backslash
 hline 
 \backslash
-textbf{0.40} & 0.1102 & 0.0816 & 0.0695 & 0.0641 & 0.0614
+textbf{0.40} & 0.0769 & 0.0705 & 0.0630 & 0.0592 & 0.0564
 \backslash
 
 \backslash
@@ -631,7 +631,7 @@ textbf{0.40} & 0.1102 & 0.0816 & 0.0695 & 0.0641 & 0.0614
 \backslash
 hline 
 \backslash
-textbf{0.45} & 0.1276 & 0.0959 & 0.0822 & 0.0759 & 0.0727
+textbf{0.45} & 0.0778 & 0.0719 & 0.0653 & 0.0598 & 0.0568
 \backslash
 
 \backslash
@@ -639,7 +639,7 @@ textbf{0.45} & 0.1276 & 0.0959 & 0.0822 & 0.0759 & 0.0727
 \backslash
 hline 
 \backslash
-textbf{0.50} & 0.1424 & 0.1090 & 0.0942 & 0.0874 & 0.0838
+textbf{0.50} & 0.0783 & 0.0726 & 0.0659 & 0.0602 & 0.0570
 \backslash
 
 \backslash
@@ -647,7 +647,7 @@ textbf{0.50} & 0.1424 & 0.1090 & 0.0942 & 0.0874 & 0.0838
 \backslash
 hline 
 \backslash
-textbf{0.55} & 0.1542 & 0.1204 & 0.1049 & 0.0977 & 0.0939
+textbf{0.55} & 0.0786 & 0.0735 & 0.0665 & 0.0606 & 0.0576
 \backslash
 
 \backslash
@@ -655,7 +655,11 @@ textbf{0.55} & 0.1542 & 0.1204 & 0.1049 & 0.0977 & 0.0939
 \backslash
 hline 
 \backslash
-textbf{0.60} & 0.1636 & 0.1300 & 0.1142 & 0.1068 & 0.1030
+textbf{0.60} & 
+\backslash
+textbf{0.0789}$
+\backslash
+bullet$ & 0.0740 & 0.0673 & 0.0618 & 0.0576
 \backslash
 
 \backslash
@@ -663,7 +667,7 @@ textbf{0.60} & 0.1636 & 0.1300 & 0.1142 & 0.1068 & 0.1030
 \backslash
 hline 
 \backslash
-textbf{0.65} & 0.1710 & 0.1382 & 0.1221 & 0.1147 & 0.1108
+textbf{0.65} & 0.0789 & 0.0742 & 0.0676 & 0.0622 & 0.0576
 \backslash
 
 \backslash
@@ -671,7 +675,7 @@ textbf{0.65} & 0.1710 & 0.1382 & 0.1221 & 0.1147 & 0.1108
 \backslash
 hline 
 \backslash
-textbf{0.70} & 0.1763 & 0.1445 & 0.1286 & 0.1211 & 0.1173
+textbf{0.70} & 0.0784 & 0.0743 & 0.0680 & 0.0625 & 0.0584
 \backslash
 
 \backslash
@@ -679,7 +683,7 @@ textbf{0.70} & 0.1763 & 0.1445 & 0.1286 & 0.1211 & 0.1173
 \backslash
 hline 
 \backslash
-textbf{0.75} & 0.1797 & 0.1495 & 0.1340 & 0.1265 & 0.1225
+textbf{0.75} & 0.0782 & 0.0741 & 0.0682 & 0.0632 & 0.0594
 \backslash
 
 \backslash
@@ -687,11 +691,7 @@ textbf{0.75} & 0.1797 & 0.1495 & 0.1340 & 0.1265 & 0.1225
 \backslash
 hline 
 \backslash
-textbf{0.80} & 
-\backslash
-textbf{0.1813}$
-\backslash
-bullet$ & 0.1532 & 0.1379 & 0.1305 & 0.1267
+textbf{0.80} & 0.0781 & 0.0736 & 0.0685 & 0.0643 & 0.0608
 \backslash
 
 \backslash
@@ -699,7 +699,7 @@ bullet$ & 0.1532 & 0.1379 & 0.1305 & 0.1267
 \backslash
 hline 
 \backslash
-textbf{0.85} & 0.1808 & 0.1558 & 0.1409 & 0.1337 & 0.1299
+textbf{0.85} & 0.0780 & 0.0732 & 0.0687 & 0.0654 & 0.0626
 \backslash
 
 \backslash
@@ -707,7 +707,7 @@ textbf{0.85} & 0.1808 & 0.1558 & 0.1409 & 0.1337 & 0.1299
 \backslash
 hline 
 \backslash
-textbf{0.90} & 0.1781 & 0.1573 & 0.1431 & 0.1361 & 0.1323
+textbf{0.90} & 0.0780 & 0.0727 & 0.0689 & 0.0662 & 0.0642
 \backslash
 
 \backslash
@@ -715,7 +715,7 @@ textbf{0.90} & 0.1781 & 0.1573 & 0.1431 & 0.1361 & 0.1323
 \backslash
 hline 
 \backslash
-textbf{0.95} & 0.1736 & 0.1576 & 0.1442 & 0.1375 & 0.1339
+textbf{0.95} & 0.0780 & 0.0721 & 0.0692 & 0.0667 & 0.0649
 \backslash
 
 \backslash
@@ -723,7 +723,7 @@ textbf{0.95} & 0.1736 & 0.1576 & 0.1442 & 0.1375 & 0.1339
 \backslash
 hline 
 \backslash
-textbf{1.00} & 0.1624 & 0.1547 & 0.1445 & 0.1393 & 0.1366
+textbf{1.00} & 0.0730 & 0.0684 & 0.0656 & 0.0643 & 0.0638
 \backslash
 
 \backslash
@@ -733,13 +733,1066 @@ hline
 \backslash
 end{tabular} 
 \backslash
-caption{Item Based CF, distance=cosine, binary, max neighboors = 50} 
+caption{Dataset
 \backslash
-label{table:MAP_icf_cosine_binary_mnn=50} 
+_1, User Based CF, distance=cosine, binary, max neighbours = 50, MAP for
+ different values of $
+\backslash
+alpha$ and q} 
+\backslash
+label{table:MAP_Dataset_1_ucf_cosine_binary_mnn=50} 
+\backslash
+end{center} 
+\backslash
+end{table}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table} 
+\backslash
+begin{center} 
+\backslash
+begin{tabular}{ | l || c | c | c | c | c |} 
+\backslash
+hline 
+\backslash
+textbf{$
+\backslash
+alpha$} & 
+\backslash
+textbf{q=1} & 
+\backslash
+textbf{q=2} & 
+\backslash
+textbf{q=3} & 
+\backslash
+textbf{q=4} & 
+\backslash
+textbf{q=5} 
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.00} & 0.0056 & 0.0052 & 0.0051 & 0.0051 & 0.0051
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.05} & 0.0088 & 0.0077 & 0.0077 & 0.0078 & 0.0080
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.10} & 0.0090 & 0.0080 & 0.0082 & 0.0082 & 0.0083
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.15} & 0.0095 & 0.0086 & 0.0086 & 0.0085 & 0.0085
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.20} & 0.0103 & 0.0091 & 0.0090 & 0.0090 & 0.0089
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.25} & 0.0114 & 0.0099 & 0.0097 & 0.0096 & 0.0096
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.30} & 0.0131 & 0.0110 & 0.0107 & 0.0106 & 0.0106
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.35} & 0.0158 & 0.0133 & 0.0128 & 0.0127 & 0.0127
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.40} & 0.0200 & 0.0166 & 0.0159 & 0.0158 & 0.0157
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.45} & 0.0252 & 0.0208 & 0.0198 & 0.0194 & 0.0192
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.50} & 0.0308 & 0.0252 & 0.0240 & 0.0235 & 0.0233
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.55} & 0.0368 & 0.0301 & 0.0286 & 0.0280 & 0.0278
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.60} & 0.0426 & 0.0352 & 0.0334 & 0.0327 & 0.0324
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.65} & 0.0484 & 0.0403 & 0.0382 & 0.0375 & 0.0371
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.70} & 0.0534 & 0.0452 & 0.0429 & 0.0421 & 0.0416
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.75} & 0.0581 & 0.0497 & 0.0474 & 0.0465 & 0.0461
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.80} & 0.0622 & 0.0539 & 0.0514 & 0.0504 & 0.0499
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.85} & 0.0653 & 0.0571 & 0.0546 & 0.0536 & 0.0531
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.90} & 0.0679 & 0.0599 & 0.0574 & 0.0562 & 0.0556
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.95} & 
+\backslash
+textbf{0.0698}$
+\backslash
+bullet$ & 0.0622 & 0.0596 & 0.0584 & 0.0578
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{1.00} & 0.0693 & 0.0644 & 0.0630 & 0.0625 & 0.0622
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+end{tabular} 
+\backslash
+caption{Dataset
+\backslash
+_1, Item Based CF, distance=cosine, binary, max neighbours = 50, MAP for
+ different values of $
+\backslash
+alpha$ and q} 
+\backslash
+label{table:MAP_Dataset_1_icf_cosine_binary_mnn=50} 
+\backslash
+end{center} 
+\backslash
+end{table}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table} 
+\backslash
+begin{center} 
+\backslash
+begin{tabular}{ | l || c | c | c | c | c |} 
+\backslash
+hline 
+\backslash
+textbf{$
+\backslash
+alpha$} & 
+\backslash
+textbf{q=1} & 
+\backslash
+textbf{q=2} & 
+\backslash
+textbf{q=3} & 
+\backslash
+textbf{q=4} & 
+\backslash
+textbf{q=5} 
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.00} & 0.1908 & 0.1827 & 0.1703 & 0.1602 & 0.1533
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.05} & 0.1921 & 0.1839 & 0.1714 & 0.1615 & 0.1539
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.10} & 0.1926 & 0.1849 & 0.1726 & 0.1625 & 0.1546
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.15} & 0.1933 & 0.1857 & 0.1732 & 0.1626 & 0.1547
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.20} & 0.1938 & 0.1866 & 0.1742 & 0.1634 & 0.1551
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.25} & 0.1940 & 0.1873 & 0.1749 & 0.1639 & 0.1554
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.30} & 
+\backslash
+textbf{0.1941}$
+\backslash
+bullet$ & 0.1874 & 0.1754 & 0.1640 & 0.1553
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.35} & 0.1939 & 0.1874 & 0.1754 & 0.1642 & 0.1551
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.40} & 0.1937 & 0.1876 & 0.1759 & 0.1645 & 0.1551
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.45} & 0.1929 & 0.1872 & 0.1758 & 0.1644 & 0.1549
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.50} & 0.1921 & 0.1868 & 0.1757 & 0.1642 & 0.1546
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.55} & 0.1916 & 0.1865 & 0.1756 & 0.1640 & 0.1542
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.60} & 0.1906 & 0.1859 & 0.1754 & 0.1638 & 0.1539
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.65} & 0.1897 & 0.1852 & 0.1750 & 0.1638 & 0.1537
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.70} & 0.1889 & 0.1845 & 0.1746 & 0.1636 & 0.1536
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.75} & 0.1876 & 0.1834 & 0.1736 & 0.1630 & 0.1531
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.80} & 0.1861 & 0.1817 & 0.1723 & 0.1620 & 0.1524
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.85} & 0.1849 & 0.1802 & 0.1710 & 0.1609 & 0.1516
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.90} & 0.1843 & 0.1791 & 0.1696 & 0.1599 & 0.1511
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.95} & 0.1841 & 0.1777 & 0.1683 & 0.1588 & 0.1505
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{1.00} & 0.1776 & 0.1742 & 0.1658 & 0.1571 & 0.1502
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+end{tabular} 
+\backslash
+caption{Dataset
+\backslash
+_2, User Based CF, distance=cosine, binary, max neighbours = 50, MAP for
+ different values of $
+\backslash
+alpha$ and q} 
+\backslash
+label{table:MAP_Dataset_2_ucf_cosine_binary_mnn=50} 
 \backslash
 end{center} 
 \backslash
 end{table} 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table} 
+\backslash
+begin{center} 
+\backslash
+begin{tabular}{ | l || c | c |} 
+\backslash
+hline 
+\backslash
+textbf{$
+\backslash
+alpha$} & 
+\backslash
+textbf{q=1} & 
+\backslash
+textbf{q=2} 
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.00} & 0.1359 & 0.1126
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.05} & 0.1375 & 0.1140
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.10} & 0.1389 & 0.1153
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.15} & 0.1402 & 0.1167
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.20} & 0.1415 & 0.1183
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.25} & 0.1429 & 0.1202
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.30} & 0.1444 & 0.1227
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.35} & 0.1454 & 0.1245
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.40} & 0.1461 & 0.1262
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.45} & 
+\backslash
+textbf{0.1462}$
+\backslash
+bullet$ & 0.1266
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.50} & 0.1447 & 0.1246
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.55} & 0.1438 & 0.1216
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.60} & 0.1425 & 0.1171
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.65} & 0.1398 & 0.1110
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.70} & 0.1367 & 0.1041
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.75} & 0.1325 & 0.0956
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.80} & 0.1282 & 0.0880
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.85} & 0.1235 & 0.0816
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.90} & 0.1186 & 0.0764
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.95} & 0.1130 & 0.0718
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{1.00} & 0.1074 & 0.0677
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+end{tabular} 
+\backslash
+caption{Dataset
+\backslash
+_2, User Based CF, distance=cosine, count, max neighbours = 50, MAP for
+ different values of $
+\backslash
+alpha$ and q} 
+\backslash
+label{table:MAP_Dataset_2_ucf_cosine_count_mnn=50} 
+\backslash
+end{center} 
+\backslash
+end{table} 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table} 
+\backslash
+begin{center} 
+\backslash
+begin{tabular}{ | l || c | c |} 
+\backslash
+hline 
+\backslash
+textbf{$
+\backslash
+alpha$} & 
+\backslash
+textbf{q=1} & 
+\backslash
+textbf{q=2} 
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.00} & 0.1447 & 0.1246
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.05} & 0.1447 & 0.1246
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.10} & 0.1447 & 0.1246
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.15} & 0.1447 & 0.1246
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.20} & 0.1447 & 0.1246
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.25} & 0.1447 & 0.1246
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.30} & 0.1447 & 0.1246
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.35} & 0.1447 & 0.1246
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.40} & 0.1447 & 0.1246
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.45} & 0.1447 & 0.1246
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.50} & 
+\backslash
+textbf{0.1447}$
+\backslash
+bullet$ & 0.1246
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.55} & 0.1447 & 0.1246
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+end{tabular} 
+\backslash
+caption{Dataset
+\backslash
+_2, User Based CF, distance=cosine, norm, max neighbours = 50, MAP for different
+ values of $
+\backslash
+alpha$ and q} 
+\backslash
+label{table:MAP_Dataset_2_ucf_cosine_norm_mnn=50} 
+\backslash
+end{center} 
+\backslash
+end{table} 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table} 
+\backslash
+begin{center} 
+\backslash
+begin{tabular}{ | l || c | c |} 
+\backslash
+hline 
+\backslash
+textbf{$
+\backslash
+alpha$} & 
+\backslash
+textbf{q=1} & 
+\backslash
+textbf{q=2} 
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.00} & 0.1395 & 0.1188
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.05} & 0.1404 & 0.1194
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.10} & 0.1410 & 0.1197
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.15} & 0.1417 & 0.1199
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.20} & 0.1424 & 0.1200
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.25} & 0.1428 & 0.1201
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.30} & 0.1433 & 0.1201
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.35} & 0.1438 & 0.1202
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.40} & 0.1441 & 0.1199
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.45} & 0.1444 & 0.1197
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.50} & 0.1444 & 0.1193
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.55} & 0.1445 & 0.1190
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.60} & 0.1447 & 0.1187
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.65} & 
+\backslash
+textbf{0.1447}$
+\backslash
+bullet$ & 0.1183
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.70} & 0.1446 & 0.1178
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.75} & 0.1446 & 0.1173
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.80} & 0.1444 & 0.1167
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.85} & 0.1442 & 0.1162
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.90} & 0.1440 & 0.1157
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{0.95} & 0.1438 & 0.1151
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+textbf{1.00} & 0.1435 & 0.1144
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+end{tabular} 
+\backslash
+caption{Dataset
+\backslash
+_2, User Based CF, distance=cosine, tfidf, max neighbours = 50, MAP for
+ different values of $
+\backslash
+alpha$ and q} 
+\backslash
+label{table:MAP_Dataset_2_ucf_cosine_tfidf_mnn=50} 
+\backslash
+end{center} 
+\backslash
+end{table} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
