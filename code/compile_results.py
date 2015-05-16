@@ -73,4 +73,23 @@ for ev_meth in results:
 					print '\t' + '             '.join(Qs) + '\n'
 					for alpha in sorted(current):
 						print alpha + '\t' + '  '.join(["%.4f(%.4f)" % (current[alpha][q]['MAP'],current[alpha][q]['MrecR'])  for q in Qs]).replace('0.', '.') + '\n'
-						
+					
+					maximum = 0.
+					for alpha in sorted(current):
+						for q in Qs:
+							maximum = max(maximum, current[alpha][q]['MAP'])
+					print maximum
+							
+
+					with open("%s/%s_%s_%s_%s_%s.tex"%(dirname, ev_meth, algo, method, construction, mnn), 'w') as f_out:
+						f_out.write("\\begin{tabular}{ | l ||")
+						for q in Qs:
+							f_out.write(" c |")
+						f_out.write("}\n")
+						f_out.write("\\hline\n")
+						f_out.write('\\textbf{$\\alpha$} & ' + ' & '.join(["\\textbf{q=%s}"%(q) for q in Qs]) + ' \\\\\n')
+						f_out.write("\\hline\n")
+						for alpha in sorted(current):
+							f_out.write('\\textbf{' + alpha + '}' + ' & ' + ' & '.join(["\\underline{%.4f}" % (current[alpha][q]['MAP']) if (current[alpha][q]['MAP'] == maximum) else "%.4f" % (current[alpha][q]['MAP'])  for q in Qs]) + '\\\\\n')
+							f_out.write("\\hline\n")
+						f_out.write("\\end{tabular}\n")
