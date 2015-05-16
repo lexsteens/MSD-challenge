@@ -114,8 +114,8 @@ Content based
 
 \begin_layout Standard
 Content based methods extract song characteristics (such as Genre, beat,
- lyrics, ...) to build a model (clustering, SVM, Naive Bayes, Neural Network,
- ...) and recommend songs similar to those the user has listened in the past.
+ lyrics, ...) to build a model (such as a clustering the songs) and recommend
+ songs similar to those the user has listened in the past.
 \end_layout
 
 \begin_layout Subsection*
@@ -250,8 +250,8 @@ Feature Combination
 \noun on
 Parallel: 
 \noun default
-uses two or more simple ranking algorithms and creates a higher level ranking
- for recommendation:
+uses two or more simple ranking algorithms in parallel to creates a higher
+ level ranking:
 \end_layout
 
 \begin_deeper
@@ -259,12 +259,28 @@ uses two or more simple ranking algorithms and creates a higher level ranking
 
 \noun on
 Weighting: 
+\noun default
+assigns a weight to each ranking algorithm then, for each final recommendation,
+ 
+\begin_inset Quotes eld
+\end_inset
+
+randomly
+\begin_inset Quotes erd
+\end_inset
+
+ chooses the next recommendation of one of the rankings according to their
+ weights
 \end_layout
 
 \begin_layout Itemize
 
 \noun on
-Switching
+Switching: 
+\noun default
+uses an oracle to decide which ranking algorithm to use for a specific user,
+ by looking at the characteristics of this particular user (history length,
+ number of nearest neighboors, sensibility to popular songs, ...)
 \end_layout
 
 \end_deeper
@@ -272,19 +288,28 @@ Switching
 
 \noun on
 Pipelined
+\noun default
+: uses two or more simple ranking algorithms one after each other to creates
+ a final ranking:
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
 
 \noun on
-Cascade
+Cascade: 
+\noun default
+each successive algorithm exclude songs from the list of all possible songs
+ to recommend
 \end_layout
 
 \begin_layout Itemize
 
 \noun on
-Meta-Level
+Meta-Level: 
+\noun default
+each algorithm builds a model that can be exploited by the next one, until
+ the last algorithm provides a ranking based on the model it received
 \end_layout
 
 \end_deeper
@@ -293,34 +318,24 @@ Performance evaluation
 \end_layout
 
 \begin_layout Standard
-2 factors for popularity algorithm:
+There are many performance measures available to evaluate recommender systems.
 \end_layout
 
-\begin_layout Enumerate
-The popularity distribution: by selecting only users with more songs, we
- influence the popularity distribution, leading to songs being pushed down
- the ranking 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-why??
+\begin_layout Standard
+The Kaggle MSD Challenge Competition uses the Truncated Mean Average Precision
+ (MAP) to evaluate recommendation submissions.
+ If the Precision at rank 
+\emph on
+k
+\emph default
+ is denoted by:
 \end_layout
 
-\end_inset
-
-, lowering the average precision
-\end_layout
-
-\begin_layout Enumerate
-The number of songs in the validation set: the fewer they are, the lower
- the denominator is, increasing the average precision 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-check if true!
-\end_layout
+\begin_layout Standard
+\begin_inset Formula 
+\[
+P_{\left(u,k\right)}=\frac{1}{k}\sum_{l=1}^{k}R_{(u,l)}
+\]
 
 \end_inset
 
@@ -328,93 +343,81 @@ check if true!
 \end_layout
 
 \begin_layout Standard
-Example, for the same user 0093ea2ad5eebbfe7635a70909b7988d1b340a5a in 2
- different subsets of the kaggle_visible_evaluations_triplets, we get different
- results:
-\end_layout
-
-\begin_layout Itemize
-If we only select users listening to at least 30 songs (only 2953 users
- left), song in training set if <= #songs / 2, otherwise in validation set:
-\end_layout
-
-\begin_layout LyX-Code
-Precision @8: 0.125
-\end_layout
-
-\begin_layout LyX-Code
-Precision @56: 0.03571
-\end_layout
-
-\begin_layout LyX-Code
-Precision @90: 0.03333
-\end_layout
-
-\begin_layout LyX-Code
-Precision @119: 0.03361
-\begin_inset Note Note
-status open
-
-\begin_layout LyX-Code
-( !! WHY MORE THAN @90 --> to check !! )
-\end_layout
+\begin_inset Formula 
+\[
+\text{where: }R_{(u,l)}=\begin{cases}
+1 & \text{if song at rank \emph{l} is a relevant song}\\
+0 & \text{otherwise}
+\end{cases}
+\]
 
 \end_inset
 
 
 \end_layout
 
-\begin_layout LyX-Code
-Precision @162: 0.03086
+\begin_layout Standard
+The Average Precision for user 
+\emph on
+u,
+\emph default
+ truncated at rank 
+\emph on
+K
+\emph default
+, is then:
 \end_layout
 
-\begin_layout LyX-Code
-Precision @309: 0.01941
+\begin_layout Standard
+\begin_inset Formula 
+\[
+AP(u,K)=\frac{1}{\tau_{u}}\sum_{k=1}^{K}P_{(u,k)}R_{(u,k)}
+\]
+
+\end_inset
+
+
 \end_layout
 
-\begin_layout LyX-Code
-Average Precision @500: 0.2779 / 6 = 0.04632
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\text{where: }\tau_{u}=\min\left(K,P_{(u,K)}\right)
+\]
+
+\end_inset
+
+
 \end_layout
 
-\begin_layout Itemize
-If we only select users listening to at least 10 songs (only 61841 users
- left), song in training set if <= #songs / 2, otherwise in validation set:
+\begin_layout Standard
+The Mean Average Precision is then the average of 
+\emph on
+AP
+\emph default
+'s for all users:
 \end_layout
 
-\begin_layout LyX-Code
-Precision @5: 0.2
+\begin_layout Standard
+\begin_inset Formula 
+\[
+MAP(K)=\frac{1}{U}\sum_{u=1}^{U}AP(u,K)
+\]
+
+\end_inset
+
+
 \end_layout
 
-\begin_layout LyX-Code
-Precision @17: 0.11764
-\end_layout
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\text{where: }U=\text{number of users to evaluate}
+\]
 
-\begin_layout LyX-Code
-Precision @85: 0.03529
-\end_layout
+\end_inset
 
-\begin_layout LyX-Code
-Precision @118: 0.03389
-\end_layout
 
-\begin_layout LyX-Code
-Precision @141: 0.03546
-\end_layout
-
-\begin_layout LyX-Code
-Precision @179: 0.03351
-\end_layout
-
-\begin_layout LyX-Code
-Precision @231: 0.03030
-\end_layout
-
-\begin_layout LyX-Code
-Precision @380: 0.02105
-\end_layout
-
-\begin_layout LyX-Code
-Average Precision @500: 0.5071 / 8 = 0.06339
 \end_layout
 
 \begin_layout Section*
