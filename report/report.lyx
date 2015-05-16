@@ -452,7 +452,9 @@ status open
 
 Table 
 \backslash
-ref{table:blah}
+ref{table:MAP_icf_cosine_binary_mnn=50} on page 
+\backslash
+pageref{table:MAP_icf_cosine_binary_mnn=50}
 \end_layout
 
 \end_inset
@@ -514,8 +516,11 @@ Advances in Artificial Intelligence, January 2009.
 ANNEXES
 \end_layout
 
-\begin_layout Standard
-d
+\begin_layout Section*
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -526,19 +531,9 @@ status open
 
 
 \backslash
-begin{table}
-\end_layout
-
-\begin_layout Plain Layout
-
-
+begin{table} 
 \backslash
-begin{center}
-\end_layout
-
-\begin_layout Plain Layout
-
-
+begin{center} 
 \backslash
 begin{tabular}{ | l || c | c | c | c | c |} 
 \backslash
@@ -694,7 +689,9 @@ hline
 \backslash
 textbf{0.80} & 
 \backslash
-underline{0.1813} & 0.1532 & 0.1379 & 0.1305 & 0.1267
+textbf{0.1813}$
+\backslash
+bullet$ & 0.1532 & 0.1379 & 0.1305 & 0.1267
 \backslash
 
 \backslash
@@ -734,46 +731,16 @@ textbf{1.00} & 0.1624 & 0.1547 & 0.1445 & 0.1393 & 0.1366
 \backslash
 hline 
 \backslash
-end{tabular}
-\end_layout
-
-\begin_layout Plain Layout
-
-
+end{tabular} 
 \backslash
-caption{This is a caption}
-\end_layout
-
-\begin_layout Plain Layout
-
-
+caption{Item Based CF, distance=cosine, binary, max neighboors = 50} 
 \backslash
-label{table:blah}
-\end_layout
-
-\begin_layout Plain Layout
-
-
+label{table:MAP_icf_cosine_binary_mnn=50} 
 \backslash
-end{center}
-\end_layout
-
-\begin_layout Plain Layout
-
-
+end{center} 
 \backslash
-end{table}
+end{table} 
 \end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-1"
 
 \end_inset
 

@@ -78,10 +78,17 @@ for ev_meth in results:
 					for alpha in sorted(current):
 						for q in Qs:
 							maximum = max(maximum, current[alpha][q]['MAP'])
-					print maximum
-							
+					
+					if algo == 'ucf':
+						algorithm = 'User Based CF'
+					elif algo == 'ucf2':
+						algorithm = 'User Based CF 2'
+					elif algo == 'icf':
+						algorithm = 'Item Based CF'
 
 					with open("%s/%s_%s_%s_%s_%s.tex"%(dirname, ev_meth, algo, method, construction, mnn), 'w') as f_out:
+						f_out.write("\\begin{table}\n")
+						f_out.write("\\begin{center}\n")
 						f_out.write("\\begin{tabular}{ | l ||")
 						for q in Qs:
 							f_out.write(" c |")
@@ -90,6 +97,10 @@ for ev_meth in results:
 						f_out.write('\\textbf{$\\alpha$} & ' + ' & '.join(["\\textbf{q=%s}"%(q) for q in Qs]) + ' \\\\\n')
 						f_out.write("\\hline\n")
 						for alpha in sorted(current):
-							f_out.write('\\textbf{' + alpha + '}' + ' & ' + ' & '.join(["\\underline{%.4f}" % (current[alpha][q]['MAP']) if (current[alpha][q]['MAP'] == maximum) else "%.4f" % (current[alpha][q]['MAP'])  for q in Qs]) + '\\\\\n')
+							f_out.write('\\textbf{' + alpha + '}' + ' & ' + ' & '.join(["\\textbf{%.4f}$\\bullet$" % (current[alpha][q]['MAP']) if (current[alpha][q]['MAP'] == maximum) else "%.4f" % (current[alpha][q]['MAP'])  for q in Qs]) + '\\\\\n')
 							f_out.write("\\hline\n")
 						f_out.write("\\end{tabular}\n")
+						f_out.write("\\caption{%s, distance=%s, %s, max neighbours = %s}\n"%(algorithm, method, construction, mnn.replace("mnn=", "")))
+						f_out.write("\\label{table:MAP_%s_%s_%s_%s}\n"%(algo, method, construction, mnn))
+						f_out.write("\\end{center}\n")
+						f_out.write("\\end{table}\n")
