@@ -112,36 +112,156 @@ Overview of possible methods
 Content based
 \end_layout
 
+\begin_layout Standard
+Content based methods extract song characteristics (such as Genre, beat,
+ lyrics, ...) to build a model (clustering, SVM, Naive Bayes, Neural Network,
+ ...) and recommend songs similar to those the user has listened in the past.
+\end_layout
+
 \begin_layout Subsection*
 Context based
+\end_layout
+
+\begin_layout Standard
+Context base methods use social information such as comments, music review,
+ tags, ...
+ to predict similarities between songs
 \end_layout
 
 \begin_layout Subsection*
 Collaborative Filtering
 \end_layout
 
-\begin_layout Subsubsection*
-Model Based
+\begin_layout Standard
+Collaborative Filtering techniques
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-3"
+
+\end_inset
+
+ are based on the assumption that the listening history of all users provides
+ valuable information that one could exploit to give recommendations to
+ a specific user.
 \end_layout
 
-\begin_layout Subsubsection*
-Memory Based
+\begin_layout Standard
+Different flavor of Collaborative filtering exists, which can be classified
+ (at high level) by:
+\end_layout
+
+\begin_layout Itemize
+their use of modelization:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\noun on
+Memory based
+\noun default
+ Collaborative Filtering methods use the entire set of user history to make
+ a prediction, and are therefore memory consumers
+\end_layout
+
+\begin_layout Itemize
+
+\noun on
+Model Based
+\noun default
+ Collaborative Filtering methods build and train a data mining prediction
+ model of the users preferences, that will later be used to provide a prediction
+ for a specific user
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+their focus:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\noun on
+User Based
+\noun default
+ Collaborative Filtering methods compute the similiarities between the user
+ A for which we would like to make a prediction and all other users, then
+ proposing to user A the songs listened by those similar users, ranked in
+ decreasing order of user A predicted preference
+\end_layout
+
+\begin_layout Itemize
+
+\noun on
+Item Based
+\noun default
+ Collaborative Filtering methods, on the other hand, first precompute the
+ similiarities between each songs, and use those similarities to provide
+ user A with a ranked list of songs similar to the ones he listened to 
+\end_layout
+
+\end_deeper
+\begin_layout Subsection*
+Dimensionality Reduction
+\end_layout
+
+\begin_layout Standard
+Dimensionality Reduction methods like the Principal Component Analisys can
+ be used to reduce the amount of data calculations are based on, then improving
+ response times and ofthen, also, recommendation performances.
+ Singular Value Decomposition can also be used to provide recommendations
+ on its own.
 \end_layout
 
 \begin_layout Subsection*
 Hybrid Methodologies
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Standard
+Different approaches can be used to use
+\end_layout
+
+\begin_layout Itemize
 Monolithic
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_deeper
+\begin_layout Itemize
+Feature Combination
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
 Parallel
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_deeper
+\begin_layout Itemize
+Weighting
+\end_layout
+
+\begin_layout Itemize
+Switching
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
 Pipelined
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Cascade
+\end_layout
+
+\begin_layout Itemize
+Meta-Level
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection*
+
 \end_layout
 
 \begin_layout Section*
@@ -291,6 +411,45 @@ conclusion & Future Work
 
 \begin_layout Part*
 ANNEXES
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-2"
+
+\end_inset
+
+
+\emph on
+Will Hill, Larry Stead, Mark Rosenstein, George Furnas, and South Street
+\emph default
+.
+ Recommending and Evaluating Choices in a Vitual Community of Use.
+ 
+\emph on
+Mosaic A Journal For The Interdisciplinary Study Of Literature
+\emph default
+, pages 5–12, 1995.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-3"
+
+\end_inset
+
+
+\emph on
+Xiaoyuan Su and Taghi M.
+ Khoshgoftaar
+\emph default
+.
+ A survey of collaborative filtering techniques.
+ 
+\emph on
+Advances in Artificial Intelligence, January 2009.
 \end_layout
 
 \end_body
