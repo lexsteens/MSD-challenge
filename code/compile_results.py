@@ -4,27 +4,35 @@ from os.path import isfile, join
 
 ds_name = sys.argv[1]
 dirname = "datasets/" + ds_name
-filter = sys.argv[2]
+filter = sys.argv[2] if len(sys.argv) > 2 else ""
 
 exclude_files = [
 	'kaggle_songs.txt',
 	'kaggle_users.txt',
 	ds_name + '.txt',
 	ds_name + '_ts.txt',
-	ds_name + '_vs.txt'
+	ds_name + '_vs.txt',
+	'MAP_popularity.txt',
+	'item_listening_lengths.txt',
+	'user_history_lengths.txt'
 ]
 
 only_files = [f for f in listdir(dirname) if isfile(join(dirname, f))]
 text_files = [f for f in only_files if f.endswith('.txt')]
 result_files = [f for f in text_files if f not in exclude_files]
 not_hybrids = [f for f in result_files if not f.startswith('MAP_hybrid')]
+with_mnn = [f for f in not_hybrids if "mnn=" in f]
 
 results = {}
 
-for file in not_hybrids:
+for file in with_mnn:
 	if not filter in file:
 		continue
-	ev_meth, algo, method, construction, alpha, mnn, q = file[:-4].split('_')
+	try:
+		ev_meth, algo, method, construction, alpha, mnn, q = file[:-4].split('_')
+	except Exception, e:
+		print "Error for:", file
+		print str(e)
 	alpha = "%.2f" % float(alpha.split('=')[1])
 	q = q.split('=')[1]
 	if ev_meth not in results:
