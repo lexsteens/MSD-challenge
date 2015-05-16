@@ -1,13 +1,20 @@
-from dataset import dataset
 import numpy as np
 import matplotlib.pyplot as plt
 import sys
 
-ds_name = "sample_1"
+ds_name = sys.argv[1]
 dir_name = "datasets/%s"%(ds_name)
-print dir_name
 
-# dataset_ts = dataset("%s_ts.txt"%(ds_name))
+if ds_name == "sample_1":
+	# files = ["MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.txt", "MAP_icf_cosine_binary_alpha=0.8_mnn=50_q=1.txt", "MAP_popularity.txt", "MAP_hybrid_stochastic_set=set1_theta=0.50.txt"]
+	files = ["MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.txt", "MAP_icf_cosine_binary_alpha=0.8_mnn=50_q=1.txt", "MAP_popularity.txt"]
+elif ds_name == "sample_2":
+	files = ["MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.txt", "MAP_icf_cosine_binary_alpha=0.85_mnn=50_q=1.txt", "MAP_popularity.txt"]
+
+plot_styles = ["c^-","m^-","r^-","y^-","b^-"]
+
+hist_max = 50
+
 
 # Loading history lengths:
 # ------------------------
@@ -33,7 +40,7 @@ for history_length in history_lengths:
 
 # Start plotting:
 fig, ax1 = plt.subplots()
-ax1.plot(history_lengths, history_length_dist, 'gs-')
+ax1.plot(history_lengths[:hist_max], history_length_dist[:hist_max], 'gs-')
 ax1.set_ylabel('number of users', color='g')
 ax1.set_xlabel('history length')
 for tl in ax1.get_yticklabels():
@@ -43,7 +50,7 @@ for tl in ax1.get_yticklabels():
 # Loading evaluations:
 # --------------------
 MAP_dist = {}
-for file in ["MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.txt", "MAP_icf_cosine_binary_alpha=0.8_mnn=50_q=1.txt", "MAP_icf_cosine_binary_alpha=0.8_mnn=500_q=1.txt", "MAP_popularity.txt"]:
+for file in files:
 	avePs_for_history_length = [[] for i in range(len(history_lengths))]
 	with open("%s/%s"%(dir_name, file), 'r') as f:
 		for line in f:
@@ -74,9 +81,8 @@ for file in ["MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.txt", "MAP_icf_cosine_b
 
 	
 ax2 = ax1.twinx()
-ax2.plot(history_lengths, MAP_dist['MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.txt'], 'b^-')
-ax2.plot(history_lengths, MAP_dist['MAP_icf_cosine_binary_alpha=0.8_mnn=50_q=1.txt'], 'y^-')
-ax2.plot(history_lengths, MAP_dist['MAP_popularity.txt'], 'r^-')
+for file in files:
+	ax2.plot(history_lengths[:hist_max], MAP_dist[file][:hist_max], plot_styles.pop())
 ax2.set_ylabel('MAP', color='b')
 for tl in ax2.get_yticklabels():
 	tl.set_color('b')
