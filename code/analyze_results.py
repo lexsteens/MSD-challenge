@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
+from matplotlib.font_manager import FontProperties
 import sys
 
 ds_name = sys.argv[1]
@@ -93,7 +94,11 @@ for tl in ax2.get_yticklabels():
 	tl.set_color('b')
 
 
-print plt.legend(leg, legends)	
+	
+	
+fontP = FontProperties()
+fontP.set_size('medium')
+print plt.legend(leg, legends, bbox_to_anchor=(0.6, 1), prop = fontP)	
 
 plt.show()
 	

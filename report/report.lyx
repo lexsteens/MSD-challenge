@@ -3,6 +3,9 @@
 \begin_document
 \begin_header
 \textclass article
+\begin_preamble
+\usepackage{float}
+\end_preamble
 \use_default_options true
 \maintain_unincluded_children false
 \language english
@@ -25,8 +28,9 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
+\spacing single
 \use_hyperref false
-\papersize default
+\papersize a4paper
 \use_geometry false
 \use_package amsmath 1
 \use_package amssymb 1
@@ -114,7 +118,7 @@ Content based
 
 \begin_layout Standard
 Content based methods extract song characteristics (such as Genre, beat,
- lyrics, ...) to build a model (such as a clustering the songs) and recommend
+ lyrics, ...) to build a model (Clustering, Bayesian Network, ...) and recommend
  songs similar to those the user has listened in the past.
 \end_layout
 
@@ -125,7 +129,10 @@ Context based
 \begin_layout Standard
 Context base methods use social information such as comments, music review,
  tags, ...
- to predict similarities between songs
+ to predict similarities between songs.
+ Other information such as characteritic of the user for which we want to
+ make a prediction, such as its age, education, location, ...
+ might also be taken into account to make a prediction
 \end_layout
 
 \begin_layout Subsection*
@@ -161,7 +168,8 @@ their use of modelization:
 Memory based
 \noun default
  Collaborative Filtering methods use the entire set of user history to make
- a prediction, and are therefore memory consumers
+ a prediction, typically using a KNN approach to find similar users and
+ propose the songs they listen to.
 \end_layout
 
 \begin_layout Itemize
@@ -170,8 +178,8 @@ Memory based
 Model Based
 \noun default
  Collaborative Filtering methods build and train a data mining prediction
- model of the users preferences, that will later be used to provide a prediction
- for a specific user
+ model (Clustering, Bayesian Network, ...) of the users preferences, that will
+ later be used to provide a prediction for a specific user
 \end_layout
 
 \end_deeper
@@ -314,6 +322,313 @@ each algorithm builds a model that can be exploited by the next one, until
 
 \end_deeper
 \begin_layout Section*
+Choosen approach
+\end_layout
+
+\begin_layout Standard
+The MSD challenge provides use with a listening history in the form of triplets
+ <user, song, number of times listened>.
+ Plenty of content information about the songs is also available in the
+ Million Song Dataset, such as music genre, beat information, etc.
+\end_layout
+
+\begin_layout Standard
+For this case study, I choosed to evaluate the performances of Collaborative
+ Filtering methods, based upon the user listening history, and more specifically
+ on Memory Based methods (both User Based and Item Based), using a simple
+ weighted sum strategy to score the items for a particular user, following
+ the method used in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-1"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Collaborative filtering
+\end_layout
+
+\begin_layout Standard
+Collaborative filtering methods recommend songs to user 
+\begin_inset Formula $u$
+\end_inset
+
+ by associating to each song 
+\begin_inset Formula $i$
+\end_inset
+
+ a score 
+\begin_inset Formula $s_{ui}$
+\end_inset
+
+ proportional, or inversely proportional to the predicted probability that
+ user 
+\begin_inset Formula $u$
+\end_inset
+
+ will listen to song 
+\begin_inset Formula $i$
+\end_inset
+
+, then ranking them in increasing or decreasing order, depending to the
+ characteristic of the score
+\end_layout
+
+\begin_layout Standard
+In the following, I will use the words 
+\begin_inset Quotes eld
+\end_inset
+
+song
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+item
+\begin_inset Quotes erd
+\end_inset
+
+ interchangeably.
+\end_layout
+
+\begin_layout Standard
+Given:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\mathcal{U}$
+\end_inset
+
+ as the set of 
+\begin_inset Formula $n$
+\end_inset
+
+ users 
+\begin_inset Formula $u=<u_{1},u_{2},...,u_{m}>$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\mathcal{I}$
+\end_inset
+
+ as the set of 
+\begin_inset Formula $m$
+\end_inset
+
+ items 
+\begin_inset Formula $i=<i_{1},i_{2},...,i_{n}>$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\mathcal{U}(i)$
+\end_inset
+
+ as the set of users listening to item 
+\begin_inset Formula $i$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\mathcal{I}(u)$
+\end_inset
+
+ as the set of items listened by user 
+\begin_inset Formula $i$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $w_{uv}$
+\end_inset
+
+ as the similiarity between users 
+\begin_inset Formula $u$
+\end_inset
+
+ and 
+\begin_inset Formula $v$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $w_{ij}$
+\end_inset
+
+ as the similarity between songs 
+\begin_inset Formula $i$
+\end_inset
+
+ and 
+\begin_inset Formula $j$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $f(w)$
+\end_inset
+
+ as the scoring function
+\end_layout
+
+\begin_layout Standard
+The score associated to item 
+\begin_inset Formula $i$
+\end_inset
+
+ for user 
+\begin_inset Formula $u$
+\end_inset
+
+ using a User Based Collaborative Filtering strategy is then:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+s_{ui}=\sum_{v\in\mathcal{U}(i)}f(w_{uv})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+meaning 
+\emph on
+
+\begin_inset Formula $s_{ui}$
+\end_inset
+
+
+\emph default
+ is proportional to the similarities between user 
+\begin_inset Formula $u$
+\end_inset
+
+ and other users
+\begin_inset Formula $v$
+\end_inset
+
+ listening to at least one song that user 
+\bar under
+
+\begin_inset Formula $u$
+\end_inset
+
+
+\bar default
+ listened to.
+\end_layout
+
+\begin_layout Standard
+And using an Item Base Collaborative Filtering strategy:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+s_{ui}=\sum_{j\in\mathcal{I}(u)}f(w_{ij})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+meaning 
+\begin_inset Formula $s_{ui}$
+\end_inset
+
+ is proportional to the similarities between songs 
+\begin_inset Formula $i$
+\end_inset
+
+ listened by user 
+\begin_inset Formula $u$
+\end_inset
+
+ and songs 
+\begin_inset Formula $j$
+\end_inset
+
+ listened by other users who also listened to one song 
+\begin_inset Formula $i$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We still need to define 3 components:
+\end_layout
+
+\begin_layout Itemize
+the scoring function 
+\begin_inset Formula $f(w)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+the similarity functions 
+\begin_inset Formula $w_{uv}$
+\end_inset
+
+ and 
+\begin_inset Formula $w_{ij}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+the feature construction method of the vectors 
+\begin_inset Formula $u=<u_{1},u_{2},...,u_{m}>$
+\end_inset
+
+ and 
+\begin_inset Formula $i=<i_{1},i_{2},...,i_{n}>$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Scoring function
+\end_layout
+
+\begin_layout Subsubsection*
+Similarity function
+\end_layout
+
+\begin_layout Subsubsection*
+Feature Construction
+\end_layout
+
+\begin_layout Section*
 Performance evaluation
 \end_layout
 
@@ -328,13 +643,17 @@ The Kaggle MSD Challenge Competition uses the Truncated Mean Average Precision
 \emph on
 k
 \emph default
- is denoted by:
+ for user 
+\emph on
+u 
+\emph default
+is denoted by:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \[
-P_{\left(u,k\right)}=\frac{1}{k}\sum_{l=1}^{k}R_{(u,l)}
+P_{uk}=\frac{1}{k}\sum_{l=1}^{k}R_{ul}
 \]
 
 \end_inset
@@ -371,7 +690,7 @@ K
 \begin_layout Standard
 \begin_inset Formula 
 \[
-AP(u,K)=\frac{1}{\tau_{u}}\sum_{k=1}^{K}P_{(u,k)}R_{(u,k)}
+AP(K)_{u}=\frac{1}{\tau_{u}}\sum_{k=1}^{K}P_{uk}R_{uk}
 \]
 
 \end_inset
@@ -382,12 +701,17 @@ AP(u,K)=\frac{1}{\tau_{u}}\sum_{k=1}^{K}P_{(u,k)}R_{(u,k)}
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\text{where: }\tau_{u}=\min\left(K,P_{(u,K)}\right)
+\text{where: }\tau_{u}=\min\left(K,R_{uK}\right)
 \]
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+It is the average of Precisions at each rank where a relevant document was
+ found.
 \end_layout
 
 \begin_layout Standard
@@ -401,7 +725,7 @@ AP
 \begin_layout Standard
 \begin_inset Formula 
 \[
-MAP(K)=\frac{1}{U}\sum_{u=1}^{U}AP(u,K)
+MAP(K)=\frac{1}{U}\sum_{u=1}^{U}AP(K)_{u}
 \]
 
 \end_inset
@@ -426,14 +750,6 @@ Datasets
 
 \begin_layout Standard
 hey
-\end_layout
-
-\begin_layout Section*
-Choosen approach
-\end_layout
-
-\begin_layout Standard
-a
 \end_layout
 
 \begin_layout Section*
@@ -570,18 +886,27 @@ Xiaoyuan Su and Taghi M.
 Advances in Artificial Intelligence, January 2009.
 \end_layout
 
-\begin_layout Section*
-\begin_inset Newpage newpage
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-1"
+
 \end_inset
 
-ANNEXES
+
+\emph on
+Fabio Aiolli.
+
+\emph default
+ A Preliminary Study on a Recommender System for the Million Songs Dataset
+ Challenge
 \end_layout
 
 \begin_layout Section*
 \begin_inset Newpage newpage
 \end_inset
 
-
+ANNEXES
 \end_layout
 
 \begin_layout Standard
@@ -592,7 +917,7 @@ status open
 
 
 \backslash
-begin{table} 
+begin{table}[H] 
 \backslash
 begin{center} 
 \backslash
@@ -816,7 +1141,7 @@ end{table}
 
 
 \backslash
-begin{table} 
+begin{table}[H] 
 \backslash
 begin{center} 
 \backslash
@@ -1045,7 +1370,7 @@ status open
 
 
 \backslash
-begin{table} 
+begin{table}[H] 
 \backslash
 begin{center} 
 \backslash
@@ -1269,7 +1594,7 @@ end{table}
 
 
 \backslash
-begin{table} 
+begin{table}[H] 
 \backslash
 begin{center} 
 \backslash
@@ -1487,7 +1812,7 @@ end{table}
 
 
 \backslash
-begin{table} 
+begin{table}[H][ 
 \backslash
 begin{center} 
 \backslash
@@ -1705,7 +2030,7 @@ end{table}
 
 
 \backslash
-begin{table} 
+begin{table}[H] 
 \backslash
 begin{center} 
 \backslash
@@ -1928,7 +2253,7 @@ status open
 
 
 \backslash
-begin{table} 
+begin{table}[H] 
 \backslash
 begin{center} 
 \backslash
@@ -2152,7 +2477,7 @@ end{table}
 
 
 \backslash
-begin{table} 
+begin{table}[H] 
 \backslash
 begin{center} 
 \backslash
@@ -2376,7 +2701,7 @@ end{table}
 
 
 \backslash
-begin{table} 
+begin{table}[H] 
 \backslash
 begin{center} 
 \backslash
@@ -2600,7 +2925,7 @@ end{table}
 
 
 \backslash
-begin{table} 
+begin{table}[H] 
 \backslash
 begin{center} 
 \backslash
@@ -2829,7 +3154,7 @@ status open
 
 
 \backslash
-begin{table} 
+begin{table}[H] 
 \backslash
 begin{center} 
 \backslash
@@ -3047,7 +3372,7 @@ end{table}
 
 
 \backslash
-begin{table} 
+begin{table}[H] 
 \backslash
 begin{center} 
 \backslash
