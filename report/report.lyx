@@ -130,8 +130,8 @@ Context based
 Context base methods use social information such as comments, music review,
  tags, ...
  to predict similarities between songs.
- Other information such as characteritic of the user for which we want to
- make a prediction, such as its age, education, location, ...
+ Other information such as characteristic of the user for which we want
+ to make a prediction, such as its age, education, location, ...
  might also be taken into account to make a prediction
 \end_layout
 
@@ -158,7 +158,7 @@ Different flavor of Collaborative filtering exists, which can be classified
 \end_layout
 
 \begin_layout Itemize
-their use of modelization:
+their use of a model:
 \end_layout
 
 \begin_deeper
@@ -193,7 +193,7 @@ their focus:
 \noun on
 User Based
 \noun default
- Collaborative Filtering methods compute the similiarities between the user
+ Collaborative Filtering methods compute the similarities between the user
  A for which we would like to make a prediction and all other users, then
  proposing to user A the songs listened by those similar users, ranked in
  decreasing order of user A predicted preference
@@ -204,7 +204,7 @@ User Based
 \noun on
 Item Based
 \noun default
- Collaborative Filtering methods, on the other hand, first precompute the
+ Collaborative Filtering methods, on the other hand, first pre-compute the
  similiarities between each songs, and use those similarities to provide
  user A with a ranked list of songs similar to the ones he listened to 
 \end_layout
@@ -215,9 +215,9 @@ Dimensionality Reduction
 \end_layout
 
 \begin_layout Standard
-Dimensionality Reduction methods like the Principal Component Analisys can
+Dimensionality Reduction methods like the Principal Component Analysis can
  be used to reduce the amount of data calculations are based on, then improving
- response times and ofthen, also, recommendation performances.
+ response times and often, also, recommendation performances.
  Singular Value Decomposition can also be used to provide recommendations
  on its own.
 \end_layout
@@ -228,9 +228,8 @@ Hybrid Methodologies
 
 \begin_layout Standard
 Different approaches can be used to combine the results of the several recommend
-ation strategies into one, in an atempt to get higher recommendation performance
-s.
- Those hybridization mothods can be classified as follow:
+ation strategies into one, in an tempt to get higher recommendation performances.
+ Those hybridization methods can be classified as follow:
 \end_layout
 
 \begin_layout Itemize
@@ -238,7 +237,7 @@ s.
 \noun on
 Monolithic
 \noun default
-: creates a single recommendation component, using a complexe recommending
+: creates a single recommendation component, using a complex recommending
  algorithm in its cores:
 \end_layout
 
@@ -288,14 +287,14 @@ Switching:
 \noun default
 uses an oracle to decide which ranking algorithm to use for a specific user,
  by looking at the characteristics of this particular user (history length,
- number of nearest neighboors, sensibility to popular songs, ...)
+ number of nearest neighbors, sensibility to popular songs, ...)
 \end_layout
 
 \end_deeper
 \begin_layout Itemize
 
 \noun on
-Pipelined
+Pipe-lined
 \noun default
 : uses two or more simple ranking algorithms one after each other to creates
  a final ranking:
@@ -322,7 +321,7 @@ each algorithm builds a model that can be exploited by the next one, until
 
 \end_deeper
 \begin_layout Section*
-Choosen approach
+Chosen approach
 \end_layout
 
 \begin_layout Standard
@@ -333,7 +332,7 @@ The MSD challenge provides use with a listening history in the form of triplets
 \end_layout
 
 \begin_layout Standard
-For this case study, I choosed to evaluate the performances of Collaborative
+For this case study, I chose to evaluate the performances of Collaborative
  Filtering methods, based upon the user listening history, and more specifically
  on Memory Based methods (both User Based and Item Based), using a simple
  weighted sum strategy to score the items for a particular user, following
@@ -457,7 +456,7 @@ Given:
 \begin_inset Formula $w_{uv}$
 \end_inset
 
- as the similiarity between users 
+ as the similarity between users 
 \begin_inset Formula $u$
 \end_inset
 
@@ -673,7 +672,7 @@ Similarity measures
 
 \begin_layout Standard
 The most common similarity measure used to compare data in a highly dimensional
- and higly sparse environment is cosine similarity, giving the angle between
+ and highly sparse environment is cosine similarity, giving the angle between
  2 vectors.
  Its values range from 
 \begin_inset Formula $1.0$
@@ -683,7 +682,7 @@ The most common similarity measure used to compare data in a highly dimensional
 \begin_inset Formula $-1.0$
 \end_inset
 
- for 2 vectors of oposite direction, passing by 
+ for 2 vectors of opposite direction, passing by 
 \begin_inset Formula $0.0$
 \end_inset
 
@@ -691,7 +690,7 @@ The most common similarity measure used to compare data in a highly dimensional
 \end_layout
 
 \begin_layout Standard
-For User Based Collaborative Filtering, the similiarity 
+For User Based Collaborative Filtering, the similarity 
 \begin_inset Formula $w_{uv}$
 \end_inset
 
@@ -802,8 +801,8 @@ There are many ways to build the vectors
 \begin_inset Formula $i$
 \end_inset
 
- from the listening histoty triplets.
- In this case study, I choosed to evaluate the following feature construction
+ from the listening history triplets.
+ In this case study, I chose to evaluate the following feature construction
  methods:
 \end_layout
 
@@ -908,7 +907,7 @@ the euclidean norm of the frequency vector
 
 \end_deeper
 \begin_layout Itemize
-TFIDF construction method, making an analogy between the song listening
+TF-IDF construction method, making an analogy between the song listening
  history and a corpus of text documents, we apply the Term Frequency, Inverse
  Document Frequency 
 \begin_inset CommandInset citation
@@ -945,9 +944,9 @@ key "key-4"
 \begin_inset Formula $M$
 \end_inset
 
- as the number of songs in the dataset.
+ as the number of songs in the Dataset.
  This has the impact of decreasing the weight of a song that is listened
- by many users, in an atempt to minimize the popularity biais that Collaborative
+ by many users, in an attempt to minimize the popularity bias that Collaborative
  Filtering methods usual suffers from.
 \end_layout
 
@@ -963,7 +962,7 @@ key "key-4"
 \begin_inset Formula $u$
 \end_inset
 
- listenining to song 
+ listening to song 
 \begin_inset Formula $i$
 \end_inset
 
@@ -975,7 +974,7 @@ key "key-4"
 \begin_inset Formula $N$
 \end_inset
 
- as the number of users in the dataset, decreasing the weight of a user
+ as the number of users in the Dataset, decreasing the weight of a user
  listening to many different songs.
 \end_layout
 
@@ -1062,8 +1061,8 @@ AP(K)_{u}=\frac{1}{\tau_{u}}\sum_{k=1}^{K}P_{uk}R_{uk}
 \end_layout
 
 \begin_layout Standard
-It is the average of Precisions at each rank where a relevant document was
- found.
+It is the average of Precision's at each rank where a relevant document
+ was found.
 \end_layout
 
 \begin_layout Standard
@@ -1105,7 +1104,7 @@ To evaluate the performance of the algorithms, we need a training set to
  generate a recommendation, and a validation set to evaluate it.
  The MSD Challenge competition provided a training set of 110.000 users and
  half of their listening history, the second half of the listening history
- being hold for performance evaluation thrue an API provided on Kaggle.
+ being hold for performance evaluation through an API provided on Kaggle.
  Since the competition is now closed and the API not available anymore,
  I created 3 new Datasets:
 \end_layout
@@ -1128,7 +1127,7 @@ on, each user having a history of 5 to 53 songs.
 Dataset_2
 \series default
  was build from the full listening history of 1M users.
- As an atempt to keep a similar distribution as the competition training
+ As an attempt to keep a similar distribution as the competition training
  set, I randomly extracted 110.000 users with a listening history between
  10 and 106 songs, giving a training set and validation set both with a
  listening history per user between 5 and 53 songs.
@@ -1140,8 +1139,8 @@ Dataset_2
 Dataset_3
 \series default
  was also build from the full listening history of 1M users, but released
- from the constrain on the user history length, in an atempt to see how
- history length influence the algorithms.
+ from the constrain on the user history length, in an tempt to see how history
+ length influence the algorithms.
  However, it seems there was no data in the full listening history with
  a user listening history lower than 5 songs.
  It contains 50.000 users with a listening history of minimum 5 songs.
@@ -1440,7 +1439,7 @@ norm
 \begin_inset Text
 
 \begin_layout Plain Layout
-TFIDF
+TF-IDF
 \end_layout
 
 \end_inset
@@ -2214,7 +2213,7 @@ key "key-2"
 Will Hill, Larry Stead, Mark Rosenstein, George Furnas, and South Street
 \emph default
 .
- Recommending and Evaluating Choices in a Vitual Community of Use.
+ Recommending and Evaluating Choices in a Virtual Community of Use.
  
 \emph on
 Mosaic A Journal For The Interdisciplinary Study Of Literature
