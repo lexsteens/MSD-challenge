@@ -1,17 +1,19 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 import sys
 
 ds_name = sys.argv[1]
 dir_name = "datasets/%s"%(ds_name)
 
 if ds_name == "sample_1":
-	# files = ["MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.txt", "MAP_icf_cosine_binary_alpha=0.8_mnn=50_q=1.txt", "MAP_popularity.txt", "MAP_hybrid_stochastic_set=set1_theta=0.50.txt"]
-	files = ["MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.txt", "MAP_icf_cosine_binary_alpha=0.8_mnn=50_q=1.txt", "MAP_popularity.txt"]
+	files = ["MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.txt", "MAP_icf_cosine_binary_alpha=0.8_mnn=50_q=1.txt", "MAP_hybrid_stochastic_set=set1_theta=0.50.txt"]
+	legends = ['# users', 'MAP User Based CF', 'MAP Item Based CF', 'MAP Stochastic Aggr']
+	# files = ["MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.txt", "MAP_icf_cosine_binary_alpha=0.8_mnn=50_q=1.txt", "MAP_popularity.txt"]
 elif ds_name == "sample_2":
 	files = ["MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.txt", "MAP_icf_cosine_binary_alpha=0.85_mnn=50_q=1.txt", "MAP_popularity.txt"]
 
-plot_styles = ["c^-","m^-","r^-","y^-","b^-"]
+plot_styles = ["m^-","r^-","k^-","y^-","b^-"]
 
 hist_max = 50
 
@@ -39,8 +41,10 @@ for history_length in history_lengths:
 
 
 # Start plotting:
+leg = []
 fig, ax1 = plt.subplots()
-ax1.plot(history_lengths[:hist_max], history_length_dist[:hist_max], 'gs-')
+val, = ax1.plot(history_lengths[:hist_max], history_length_dist[:hist_max], 'gs-')
+leg.append(val)
 ax1.set_ylabel('number of users', color='g')
 ax1.set_xlabel('history length')
 for tl in ax1.get_yticklabels():
@@ -82,11 +86,15 @@ for file in files:
 	
 ax2 = ax1.twinx()
 for file in files:
-	ax2.plot(history_lengths[:hist_max], MAP_dist[file][:hist_max], plot_styles.pop())
+	val, = ax2.plot(history_lengths[:hist_max], MAP_dist[file][:hist_max], plot_styles.pop())
+	leg.append(val)
 ax2.set_ylabel('MAP', color='b')
 for tl in ax2.get_yticklabels():
 	tl.set_color('b')
-	
+
+
+print plt.legend(leg, legends)	
+
 plt.show()
 	
 sys.exit()
