@@ -1802,7 +1802,13 @@ The Stochastic Aggregation algorithm doesn't perform as well as the 2 methods
 \end_layout
 
 \begin_layout Standard
+The best performances for the Stochastic Aggregation were reached with parameter
+ 
+\begin_inset Formula $\theta=0.4$
+\end_inset
 
+, meaning that we have, in average, 40% of the recommendations made by the
+ User Based CF, and 60% from the Item Based CF.
 \end_layout
 
 \begin_layout Standard
@@ -2028,6 +2034,72 @@ MAP
 \end_layout
 
 \begin_layout Standard
+This result might seem strange as we saw earlier that the User Based CF
+ performed better than the Item Based CF in general, but might be explained
+ if we look closer at the results.
+\end_layout
+
+\begin_layout Standard
+In 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "UCF-ICF-Popularity"
+
+\end_inset
+
+, MAP of the User Based CF, Item Based CF and Popularity algorithm are plotted
+ by length of the user's listening history.
+ The number of users by listening history is also plotted on a different
+ scale.
+ Here we can see that:
+\end_layout
+
+\begin_layout Itemize
+The performances of the popularity algorithm are clearly below the performances
+ of the Collaborative Filtering algorithms, and are fairly constant for
+ any length of user listening history (only a slight increase)
+\end_layout
+
+\begin_layout Itemize
+The performances of the CF algorithms, on the other hand, both increase
+ as the user listening history gets bigger (weither this is totally due
+ to the algorithm, or partially due to the performance evaluation methodologie
+ has not been studied here)
+\end_layout
+
+\begin_layout Itemize
+The vast majority of users have a small listening history.
+ This combined to the low performances of the algorithms in this region
+ account for a general performance below 0.20, while we can nearly reach
+ 0.30 with a bigger listening history.
+\end_layout
+
+\begin_layout Itemize
+Although the User Based CF performas better than the Item Based CF in general,
+ for small listening history the Item Based performs better
+\end_layout
+
+\begin_layout Standard
+This fourth observation explains why the performances of the Stochastic
+ Aggregation method are maximum while choosing more results from the Item
+ Based CF than from the User Based CF, as most users have a small listening
+ history and the User Based CF performs better for those.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "UCF-ICF-Hybrid"
+
+\end_inset
+
+ shows the performances of the Stochastic Aggregation method against the
+ User Based and Item Based CF.
+ We can see here that the Stochastic Aggregation method performs slightly
+ better than the User Based CF for a small listening history.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -2049,6 +2121,16 @@ status open
 \begin_layout Plain Layout
 User Based & Item Based CF vs Popularity
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "UCF-ICF-Popularity"
 
 \end_inset
 
@@ -2095,7 +2177,7 @@ User Based & Item Based CF vs Stochastic Aggregation
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "ICF-UCF-Hybrid"
+name "UCF-ICF-Hybrid"
 
 \end_inset
 
@@ -2104,42 +2186,6 @@ name "ICF-UCF-Hybrid"
 
 \begin_layout Plain Layout
 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Figure 
-\begin_inset CommandInset ref
-LatexCommand eqref
-reference "ICF-UCF-Hybrid"
-
-\end_inset
-
- 
-\begin_inset CommandInset ref
-LatexCommand vpageref
-reference "ICF-UCF-Hybrid"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-Table 
-\backslash
-ref{table:MAP_Dataset_2_icf_cosine_binary_mnn=50} on page 
-\backslash
-pageref{table:MAP_Dataset_2_icf_cosine_binary_mnn=50}
 \end_layout
 
 \end_inset
