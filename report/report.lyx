@@ -593,7 +593,7 @@ the scoring function
 \end_layout
 
 \begin_layout Itemize
-the similarity functions 
+the similarity measures 
 \begin_inset Formula $w_{uv}$
 \end_inset
 
@@ -620,8 +620,131 @@ the feature construction method of the vectors
 Scoring function
 \end_layout
 
+\begin_layout Standard
+The scoring function 
+\begin_inset Formula $f(w)$
+\end_inset
+
+ determines how much a weight for a similar user 
+\begin_inset Formula $v$
+\end_inset
+
+ or similar item 
+\begin_inset Formula $j$
+\end_inset
+
+ influence the overall score.
+ By taking:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f(w)=w^{q}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+we give more importance to the most similar users/items when 
+\begin_inset Formula $q$
+\end_inset
+
+ is higher.
+ When 
+\begin_inset Formula $q=1$
+\end_inset
+
+, the overall score is simply the sum of the similarities.
+ 
+\begin_inset Formula $q$
+\end_inset
+
+ is a parameter to tune in order to optimize the overall performance of
+ the Collaborative Filtering algorithm.
+\end_layout
+
 \begin_layout Subsubsection*
-Similarity function
+Similarity measures
+\end_layout
+
+\begin_layout Standard
+The most common similarity measure used to compare data in a highly dimensional
+ and higly sparse environment is cosine similarity, giving the angle between
+ 2 vectors.
+ Its values range from 
+\begin_inset Formula $1.0$
+\end_inset
+
+ for two completely similar vectors, to 
+\begin_inset Formula $-1.0$
+\end_inset
+
+ for 2 vectors of oposite direction, passing by 
+\begin_inset Formula $0.0$
+\end_inset
+
+ for two orthogonal vectors that don't share any information at all.
+\end_layout
+
+\begin_layout Standard
+For User Based Collaborative Filtering, the similiarity 
+\begin_inset Formula $w_{uv}$
+\end_inset
+
+ can be defined as the dot product of the vectors 
+\begin_inset Formula $\mathcal{I}(u)$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{I}(v)$
+\end_inset
+
+ divided by the lengths of the 2 vectors:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+w_{uv}=\frac{\mathcal{I}(u)\times\mathcal{I}(v)}{\sqrt{|\mathcal{I}(u)|}\sqrt{|\mathcal{I}(v)|}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For Item Based Collaborative Filtering, the similarity 
+\begin_inset Formula $w_{ij}$
+\end_inset
+
+ is defined similarly:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+w_{ij}=\frac{\mathcal{U}(i)\times\mathcal{U}(j)}{\sqrt{|U(i)|}\sqrt{|U(j)|}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-1"
+
+\end_inset
+
+, the winner of the competition introduces a 
 \end_layout
 
 \begin_layout Subsubsection*
