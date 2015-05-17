@@ -8,13 +8,19 @@ ds_name = sys.argv[1]
 dir_name = "datasets/%s"%(ds_name)
 
 if ds_name == "sample_1":
+	# files = ["MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.txt", "MAP_icf_cosine_binary_alpha=0.8_mnn=50_q=1.txt", "MAP_popularity.txt"]
+	# legends = ['# users', 'MAP User Based CF', 'MAP Item Based CF', 'Popularity']
+	# plot_styles = ["rs-","yo-","c^-"]
 	files = ["MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.txt", "MAP_icf_cosine_binary_alpha=0.8_mnn=50_q=1.txt", "MAP_hybrid_stochastic_set=set1_theta=0.50.txt"]
 	legends = ['# users', 'MAP User Based CF', 'MAP Item Based CF', 'MAP Stochastic Aggr']
-	# files = ["MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.txt", "MAP_icf_cosine_binary_alpha=0.8_mnn=50_q=1.txt", "MAP_popularity.txt"]
+	plot_styles = ["b.-","yo-","c^-"]
+	
+	
 elif ds_name == "sample_2":
 	files = ["MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.txt", "MAP_icf_cosine_binary_alpha=0.85_mnn=50_q=1.txt", "MAP_popularity.txt"]
+	plot_styles = ["m^-","rs-","b*-","yo-","c^-"]
 
-plot_styles = ["m^-","r^-","k^-","y^-","b^-"]
+
 
 hist_max = 50
 
@@ -44,7 +50,7 @@ for history_length in history_lengths:
 # Start plotting:
 leg = []
 fig, ax1 = plt.subplots()
-val, = ax1.plot(history_lengths[:hist_max], history_length_dist[:hist_max], 'gs-')
+val, = ax1.plot(history_lengths[:hist_max], history_length_dist[:hist_max], 'k.:')
 leg.append(val)
 ax1.set_ylabel('number of users', color='g')
 ax1.set_xlabel('history length')
@@ -98,7 +104,7 @@ for tl in ax2.get_yticklabels():
 	
 fontP = FontProperties()
 fontP.set_size('medium')
-print plt.legend(leg, legends, bbox_to_anchor=(0.6, 1), prop = fontP)	
+print plt.legend(leg, legends, bbox_to_anchor=(0.55, 1), prop = fontP)	
 
 plt.show()
 	
