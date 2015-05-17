@@ -728,7 +728,7 @@ For Item Based Collaborative Filtering, the similarity
 \begin_layout Standard
 \begin_inset Formula 
 \[
-w_{ij}=\frac{\mathcal{U}(i)\times\mathcal{U}(j)}{\sqrt{|U(i)|}\sqrt{|U(j)|}}
+w_{ij}=\frac{\mathcal{U}(i)\times\mathcal{U}(j)}{\sqrt{|\mathcal{U}(i)|}\sqrt{|\mathcal{U}(j)|}}
 \]
 
 \end_inset
@@ -744,13 +744,242 @@ key "key-1"
 
 \end_inset
 
-, the winner of the competition introduces a 
+, the winner of the competition proposes to introduce a parameter 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ in the cosine similarity, as follow:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+w_{uv}=\frac{\mathcal{I}(u)\times\mathcal{I}(v)}{|\mathcal{I}(u)|^{\alpha}|\mathcal{I}(v)|^{1-\alpha}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+w_{ij}=\frac{\mathcal{U}(i)\times\mathcal{U}(j)}{|\mathcal{U}(i)|^{\alpha}|\mathcal{U}(j)|^{1-\alpha}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+allowing to tune the parameter 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ from 
+\begin_inset Formula $0.0$
+\end_inset
+
+ to 
+\begin_inset Formula $1.0$
+\end_inset
+
+ to optimize the performance of the overall algorithm.
 \end_layout
 
 \begin_layout Subsubsection*
 Feature Construction
 \end_layout
 
+\begin_layout Standard
+There are many ways to build the vectors 
+\begin_inset Formula $u$
+\end_inset
+
+ and 
+\begin_inset Formula $i$
+\end_inset
+
+ from the listening histoty triplets.
+ In this case study, I choosed to evaluate the following feature construction
+ methods:
+\end_layout
+
+\begin_layout Itemize
+binary construction method: 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset Formula $u_{i}=1$
+\end_inset
+
+ if user 
+\begin_inset Formula $u$
+\end_inset
+
+ listened to song 
+\begin_inset Formula $i$
+\end_inset
+
+, and 
+\begin_inset Formula $0$
+\end_inset
+
+ otherwise
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $i_{u}=1$
+\end_inset
+
+if song 
+\begin_inset Formula $i$
+\end_inset
+
+ was listened user 
+\begin_inset Formula $u$
+\end_inset
+
+, and 
+\begin_inset Formula $0$
+\end_inset
+
+ otherwise
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+frequency construction method:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset Formula $u_{i}=$
+\end_inset
+
+ the number of time user 
+\begin_inset Formula $u$
+\end_inset
+
+ listened to song 
+\begin_inset Formula $i$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $i_{u}=$
+\end_inset
+
+ the number of time song 
+\begin_inset Formula $i$
+\end_inset
+
+ was listened by user 
+\begin_inset Formula $u$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+normed frequency construction method:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset Formula $u_{i}=$
+\end_inset
+
+ the euclidean norm of the frequency vector
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $i_{u}=$
+\end_inset
+
+the euclidean norm of the frequency vector
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+TFIDF construction method, making an analogy between the song listening
+ history and a corpus of text documents, we apply the Term Frequency, Inverse
+ Document Frequency 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-4"
+
+\end_inset
+
+ to compute the feature vectors:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset Formula $u_{i}=tf(u,i)\times idf(i)$
+\end_inset
+
+, normalized with the euclidean norm where 
+\begin_inset Formula $tf(u,i)$
+\end_inset
+
+ is the number of time user 
+\begin_inset Formula $u$
+\end_inset
+
+ listened to song 
+\begin_inset Formula $i$
+\end_inset
+
+, and 
+\begin_inset Formula $idf(i)=log(\frac{M}{|\mathcal{U}(i)|})$
+\end_inset
+
+ with 
+\begin_inset Formula $M$
+\end_inset
+
+ as the number of songs in the dataset.
+ This has the impact of decreasing the weight of a song that is listened
+ by many users, in an atempt to minimize the popularity biais that Collaborative
+ Filtering methods usual suffers from
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $i_{u}=tf(i,u)\times idf(u)$
+\end_inset
+
+, normalized with the euclidean norm where 
+\begin_inset Formula $tf(i,u)$
+\end_inset
+
+ is the number users 
+\begin_inset Formula $u$
+\end_inset
+
+ listenining to song 
+\begin_inset Formula $i$
+\end_inset
+
+, and 
+\begin_inset Formula $idf(u)=log(\frac{N}{|\mathcal{I}(u)|})$
+\end_inset
+
+ with 
+\begin_inset Formula $N$
+\end_inset
+
+ as the number of users in the dataset, decreasing the weight of a user
+ listening to many different songs
+\end_layout
+
+\end_deeper
 \begin_layout Section*
 Performance evaluation
 \end_layout
@@ -1023,6 +1252,21 @@ Fabio Aiolli.
 \emph default
  A Preliminary Study on a Recommender System for the Million Songs Dataset
  Challenge
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-4"
+
+\end_inset
+
+
+\emph on
+Juan Ramos
+\emph default
+.
+ Using TF-IDF to Determine Word Relevance in Document Queries
 \end_layout
 
 \begin_layout Section*
