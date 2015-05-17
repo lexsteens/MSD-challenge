@@ -76,6 +76,15 @@
 Case Study: Kaggle MSD challenge competition
 \end_layout
 
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section*
 Problem Statement
 \end_layout
@@ -948,7 +957,7 @@ key "key-4"
  as the number of songs in the dataset.
  This has the impact of decreasing the weight of a song that is listened
  by many users, in an atempt to minimize the popularity biais that Collaborative
- Filtering methods usual suffers from
+ Filtering methods usual suffers from.
 \end_layout
 
 \begin_layout Itemize
@@ -976,7 +985,7 @@ key "key-4"
 \end_inset
 
  as the number of users in the dataset, decreasing the weight of a user
- listening to many different songs
+ listening to many different songs.
 \end_layout
 
 \end_deeper
@@ -1101,11 +1110,265 @@ Datasets
 \end_layout
 
 \begin_layout Standard
-hey
+To evaluate the performance of the algorithms, we need a training set to
+ generate a recommendation, and a validation set to evaluate it.
+ The MSD Challenge competition provided a training set of 110.000 users and
+ half of their listening history, the second half of the listening history
+ being hold for performance evaluation thrue an API provided on Kaggle.
+ Since the competition is now closed and the API not available anymore,
+ I created 3 new Datasets:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Dataset_1
+\series default
+ is based on the original training set of 110.000 users provided by the competiti
+on, each user having a history of 5 to 53 songs.
+ It is further divided into a training set and a validation set by cutting
+ the listening history of each user in 2, giving a training set with a listening
+ history between 2 and 26 songs, and a validation set between 3 and 27 songs.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Dataset_2
+\series default
+ was build from the full listening history of 1M users.
+ As an atempt to keep a similar distribution as the competition training
+ set, I randomly extracted 110.000 users with a listening history between
+ 10 and 106 songs, giving a training set and validation set both with a
+ listening history per user between 5 and 53 songs.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Dataset_3
+\series default
+ was also build from the full listening history of 1M users, but released
+ from the constrain on the user history length.
+ However, it seems there was no data in the full listening history with
+ a user listening history lower than 5 songs.
+ It contains 50.000 users with a listening history of minimum 5 songs.
 \end_layout
 
 \begin_layout Section*
 Results
+\end_layout
+
+\begin_layout Subsection*
+User Based Collaborative Filtering
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="5">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Item Based Collaborative Filtering
 \end_layout
 
 \begin_layout Standard
