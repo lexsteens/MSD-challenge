@@ -8,17 +8,23 @@ ds_name = sys.argv[1]
 dir_name = "datasets/%s"%(ds_name)
 
 if ds_name == "sample_1":
-	# files = ["MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.txt", "MAP_icf_cosine_binary_alpha=0.8_mnn=50_q=1.txt", "MAP_popularity.txt"]
-	# legends = ['# users', 'MAP User Based CF', 'MAP Item Based CF', 'Popularity']
-	# plot_styles = ["rs-","yo-","c^-"]
-	files = ["MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.txt", "MAP_icf_cosine_binary_alpha=0.8_mnn=50_q=1.txt", "MAP_hybrid_stochastic_set=set1_theta=0.50.txt"]
-	legends = ['# users', 'MAP User Based CF', 'MAP Item Based CF', 'MAP Stochastic Aggr']
-	plot_styles = ["b.-","yo-","c^-"]
+	files = ["MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.txt", "MAP_icf_cosine_binary_alpha=0.8_mnn=50_q=1.txt", "MAP_popularity.txt"]
+	legends = ['# users', 'MAP User Based CF', 'MAP Item Based CF', 'MAP Popularity']
+	plot_styles = ["rs-","yo-","c^-"]
+	# files = ["MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.txt", "MAP_icf_cosine_binary_alpha=0.8_mnn=50_q=1.txt", "MAP_hybrid_stochastic_set=set1_theta=0.40.txt"]
+	# legends = ['# users', 'MAP User Based CF', 'MAP Item Based CF', 'MAP Stochastic Aggr']
+	# plot_styles = ["b.-","yo-","c^-"]
+	# files = ["MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.txt", "MAP_icf_cosine_binary_alpha=0.8_mnn=50_q=1.txt", "MAP_hybrid_switching_set=set1_criteria=10.00.txt"]
+	# legends = ['# users', 'MAP User Based CF', 'MAP Item Based CF', 'MAP Switching']
+	# plot_styles = ["b.-","yo-","c^-"]
+	# files = ["MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.txt", "MAP_icf_cosine_binary_alpha=0.8_mnn=50_q=1.txt", "MAP_hybrid_featcomb_set=set1_theta=0.30.txt"]
+	# legends = ['# users', 'MAP User Based CF', 'MAP Item Based CF', 'MAP Feature Comb.']
+	# plot_styles = ["b.-","yo-","c^-"]
 	
 	
 elif ds_name == "sample_2":
-	files = ["MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.txt", "MAP_icf_cosine_binary_alpha=0.85_mnn=50_q=1.txt", "MAP_popularity.txt"]
-	plot_styles = ["m^-","rs-","b*-","yo-","c^-"]
+	files = ["MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.txt", "MAP_icf_cosine_binary_alpha=0.85_mnn=50_q=1.txt", "MAP_hybrid_stochastic_set=set1_theta=0.40.txt"]
+	plot_styles = ["b.-","yo-","c^-"]
 
 
 
