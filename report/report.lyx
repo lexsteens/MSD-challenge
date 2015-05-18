@@ -226,14 +226,14 @@ Singular Value Decomposition can also be used to provide recommendations
 \end_layout
 
 \begin_layout Subsection*
-Hybrid Methodologies
+Hybrid Methods
 \end_layout
 
 \begin_layout Standard
 Different approaches can be used to combine the results of the several recommend
 ation strategies into one, in an attempt to get higher recommendation performanc
 es.
- Those hybridization methods can be classified as follow:
+ Those hybrid methods can be classified as follow:
 \end_layout
 
 \begin_layout Itemize
@@ -530,7 +530,7 @@ meaning
 \begin_inset Formula $u$
 \end_inset
 
- and other users
+ and other users 
 \begin_inset Formula $v$
 \end_inset
 
@@ -686,8 +686,11 @@ Similarity measures
 
 \begin_layout Standard
 The most common similarity measure used to compare data in a highly dimensional
- and highly sparse environment is cosine similarity, giving the angle between
- 2 vectors.
+ and highly sparse environment is 
+\emph on
+cosine similarity
+\emph default
+, giving the angle between 2 vectors.
  Its values range from 
 \begin_inset Formula $1.0$
 \end_inset
@@ -722,7 +725,7 @@ For User Based Collaborative Filtering, the similarity
 \begin_layout Standard
 \begin_inset Formula 
 \[
-w_{uv}=\frac{\mathcal{I}(u)\times\mathcal{I}(v)}{\sqrt{|\mathcal{I}(u)|}\sqrt{|\mathcal{I}(v)|}}
+w_{uv}=\frac{\mathcal{I}(u)\times\mathcal{I}(v)}{|\mathcal{I}(u)|^{\frac{1}{2}}|\mathcal{I}(v)|^{\frac{1}{2}}}
 \]
 
 \end_inset
@@ -741,7 +744,7 @@ For Item Based Collaborative Filtering, the similarity
 \begin_layout Standard
 \begin_inset Formula 
 \[
-w_{ij}=\frac{\mathcal{U}(i)\times\mathcal{U}(j)}{\sqrt{|\mathcal{U}(i)|}\sqrt{|\mathcal{U}(j)|}}
+w_{ij}=\frac{\mathcal{U}(i)\times\mathcal{U}(j)}{|\mathcal{U}(i)|^{\frac{1}{2}}|\mathcal{U}(j)|^{\frac{1}{2}}}
 \]
 
 \end_inset
@@ -942,7 +945,7 @@ key "key-4"
 \begin_inset Formula $tf(u,i)$
 \end_inset
 
- is the number of time user 
+ is the number of times user 
 \begin_inset Formula $u$
 \end_inset
 
@@ -961,7 +964,7 @@ key "key-4"
  as the number of songs in the Dataset.
  This has the impact of decreasing the weight of a song that is listened
  by many users, in an attempt to minimize the popularity bias that Collaborative
- Filtering methods usual suffers from.
+ Filtering methods usualy suffer from.
 \end_layout
 
 \begin_layout Itemize
@@ -994,24 +997,34 @@ key "key-4"
 
 \end_deeper
 \begin_layout Subsection*
+Hybrid methods
+\end_layout
+
+\begin_layout Standard
+After evaluationg the performance of the User Based and Item Based CF algorithms
+ alone, I will also evaluate the performance of their combination using
+ 3 different methods.
+\end_layout
+
+\begin_layout Subsubsection*
 Ranking Aggregation
 \end_layout
 
 \begin_layout Standard
-In this case study, I also evaluate the performance of a simple ranking
- aggregation method: the parallel weighting hybridization method described
- in the above overview.
- 
+Using 2 different recommendation algorithms, we recommend, for each rank
+ in the final aggregated recommendation:
 \end_layout
 
-\begin_layout Standard
-Using 2 different recommendation algorithms, we recommend, for each rank
- in the final aggregated recommendation, the next recommendation from the
- first algorithm with a probability 
+\begin_layout Itemize
+the next recommendation from the first algorithm with a probability 
 \begin_inset Formula $\theta$
 \end_inset
 
-, or the next recommendation from the second recommendation algorithm with
+,
+\end_layout
+
+\begin_layout Itemize
+or the next recommendation from the second recommendation algorithm with
  a probability 
 \begin_inset Formula $1-\theta$
 \end_inset
@@ -1021,7 +1034,66 @@ Using 2 different recommendation algorithms, we recommend, for each rank
 
 \begin_layout Standard
 If the next song recommended by one of those algorithm is already in the
- final ranking, we of course don't add it a second time
+ final ranking, we of course don't add it a second time.
+\end_layout
+
+\begin_layout Subsubsection*
+Feature Combination
+\end_layout
+
+\begin_layout Standard
+This method requires to get, from each algorithm, not only the rank, but
+ also the score associated with each recommendation.
+\end_layout
+
+\begin_layout Standard
+I use a linear combination of the scores and received from the 2 different
+ algorithms, in the form:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+s_{Combined}=\theta s_{Alg1}+(1-\theta)s_{Alg2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This will of course only work if the 2 algorithms have comparable scoring
+ methods.
+\end_layout
+
+\begin_layout Subsubsection*
+Algorithm Switching
+\end_layout
+
+\begin_layout Standard
+This method requires to define an 
+\begin_inset Quotes eld
+\end_inset
+
+oracle
+\begin_inset Quotes erd
+\end_inset
+
+ helping to choose, for each user, the full recommendation from the first
+ or the second algorithm.
+\end_layout
+
+\begin_layout Standard
+The oracle chosen in this case study is simply the length of the user's
+ listening history, but other could be investiguated, like the number of
+ nearest neighbors for a particular user, or its sensibility to popular
+ songs, etc.
+\end_layout
+
+\begin_layout Standard
+A variant of this method could use the oracle to tune the parameter theta
+ in the Ranking Aggregation or the Feature Combination algorithm.
 \end_layout
 
 \begin_layout Section*
@@ -2069,7 +2141,7 @@ Hybrid Methods
 
 \begin_layout Standard
 After evaluating the performances of single algorithms, I run 3 different
- hybrid methods on the ones giving the best performance
+ hybrid methods on the ones giving the best performance:
 \end_layout
 
 \begin_layout Itemize
@@ -2091,11 +2163,7 @@ The Item Based CF with a binary feature construction and cosine similarity
 \begin_inset Formula $\alpha=0.80$
 \end_inset
 
- for Dataset_2 and 
-\begin_inset Formula $\alpha=0.85$
-\end_inset
-
- for Dataset_3, and 
+ and 
 \begin_inset Formula $q=1$
 \end_inset
 
@@ -2414,7 +2482,7 @@ The performances of the popularity algorithm are clearly below the performances
 \begin_layout Itemize
 The performances of the CF algorithms, on the other hand, both increase
  as the user listening history gets bigger (weither this is totally due
- to the algorithm, or partially due to the performance evaluation methodologie
+ to the algorithm, or partially due to the performance evaluation methodology
  has not been studied here)
 \end_layout
 
@@ -2426,7 +2494,7 @@ The vast majority of users have a small listening history.
 \end_layout
 
 \begin_layout Itemize
-Although the User Based CF performas better than the Item Based CF in general,
+Although the User Based CF performs better than the Item Based CF in general,
  for small listening history the Item Based performs better
 \end_layout
 
@@ -2566,6 +2634,46 @@ Feature Combination
 \end_layout
 
 \begin_layout Standard
+Varying 
+\begin_inset Formula $\theta$
+\end_inset
+
+ for the Feature Combination method again performs better while giving more
+ importance to the Item Based CF algorithm.
+\end_layout
+
+\begin_layout Standard
+As shown in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "Featcomb_by_theta"
+
+\end_inset
+
+, the best performances are reached with 
+\begin_inset Formula $\theta=0.3$
+\end_inset
+
+, meaning the score given by the User Based CF accounts for only 
+\begin_inset Formula $30\%$
+\end_inset
+
+ of the overall score, while the Item Based CF score accounts for 
+\begin_inset Formula $70\%$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="12" columns="2">
 <features rotate="0" tabularvalignment="middle">
@@ -2827,8 +2935,53 @@ MAP
 
 \end_layout
 
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+MAP results for the Stochastic Aggregation algorithm by varying the parameter
+\begin_inset Formula $\theta$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "Featcomb_by_theta"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The Feature Combination performs better than the Stochastic Aggregation.
+ The reason, as we can see in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "UCF-ICF-Featcomb"
+
+\end_inset
+
+, is that it gives more emphasis on the Item Based CF algorithm, which gives
+ better results for a large number of userts.
+\end_layout
+
 \begin_layout Standard
 \begin_inset Float figure
+placement h
 wide false
 sideways false
 status open
@@ -2876,7 +3029,35 @@ Algorithm Switching
 \end_layout
 
 \begin_layout Standard
+The last Hybrid Method tested is the Algorithm Switching.
+\end_layout
+
+\begin_layout Standard
+Given the particular drop of performances of the User Based CF for users
+ listening to more than 10 songs, using the user listening history as oracle
+ to decide which ranking to choose from User Based and Item Based CF was
+ an obvious choice.
+\end_layout
+
+\begin_layout Standard
+As shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "UCF-ICF-Switching"
+
+\end_inset
+
+, The Switching algorithm acheives the best performances of 
+\begin_inset Formula $MAP=0.2011$
+\end_inset
+
+, simply by always choosing the best of the 2 algorithms with a very simple
+ rule.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
+placement h
 wide false
 sideways false
 status open
@@ -2919,13 +3100,41 @@ name "UCF-ICF-Switching"
 
 \end_layout
 
+\begin_layout Standard
+This is however very particular to this dataset and the behavior of the
+ User Based algorithm.
+ For less obvious situations, it might be interesting to investiguate other
+ oracles.
+\end_layout
+
 \begin_layout Subsection*
 Results summary
 \end_layout
 
 \begin_layout Standard
+Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "Results_summary"
+
+\end_inset
+
+ summarize all the results of this case study.
+ We can clearly see herethe consistency of the results accross 2 difference
+ datasets.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="7" columns="3">
+<lyxtabular version="3" rows="8" columns="3">
 <features rotate="0" tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -2993,7 +3202,7 @@ Dataset_3
 \begin_inset Text
 
 \begin_layout Plain Layout
-User Based CF
+Popularity
 \end_layout
 
 \end_inset
@@ -3002,7 +3211,7 @@ User Based CF
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.1941
+0.0392
 \end_layout
 
 \end_inset
@@ -3011,36 +3220,7 @@ User Based CF
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.1855
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Item Based CF
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.1813
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.1671
+0.0380
 \end_layout
 
 \end_inset
@@ -3086,6 +3266,35 @@ Stochastic Aggregation
 \begin_inset Text
 
 \begin_layout Plain Layout
+Item Based CF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.1813
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.1671
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 
 \emph on
 Feature Combination
@@ -3111,6 +3320,35 @@ Feature Combination
 
 \emph on
 0.1797
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+User Based CF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.1941
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.1855
 \end_layout
 
 \end_inset
@@ -3162,6 +3400,33 @@ Switching
 </cell>
 </row>
 </lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Results summary
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "Results_summary"
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
