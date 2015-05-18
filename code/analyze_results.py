@@ -23,12 +23,17 @@ if ds_name == "sample_1":
 	
 	
 elif ds_name == "sample_2":
-	files = ["MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.txt", "MAP_icf_cosine_binary_alpha=0.85_mnn=50_q=1.txt", "MAP_hybrid_stochastic_set=set1_theta=0.40.txt"]
-	plot_styles = ["b.-","yo-","c^-"]
+	files = ["MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.txt", "MAP_icf_cosine_binary_alpha=0.85_mnn=50_q=1.txt", "MAP_popularity.txt"]
+	legends = ['# users', 'MAP User Based CF', 'MAP Item Based CF', 'MAP Popularity']
+	plot_styles = ["rs-","yo-","c^-"]
+	# files = ["MAP_ucf_cosine_binary_alpha=0.3_mnn=50_q=1.txt", "MAP_icf_cosine_binary_alpha=0.85_mnn=50_q=1.txt", "MAP_hybrid_stochastic_set=set1_theta=0.40.txt"]
+	# legends = ['# users', 'MAP User Based CF', 'MAP Item Based CF', 'MAP Stochastic Aggr']
+	# plot_styles = ["b.-","yo-","c^-"]
 
 
 
-hist_max = 50
+
+hist_max = 20
 
 
 # Loading history lengths:
