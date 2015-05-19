@@ -1001,8 +1001,8 @@ Hybrid methods
 \end_layout
 
 \begin_layout Standard
-After evaluationg the performance of the User Based and Item Based CF algorithms
- alone, I will also evaluate the performance of their combination using
+After evaluationg the performances of the User Based and Item Based CF algorithm
+s alone, I will also evaluate the performances of their combinations using
  3 different methods.
 \end_layout
 
@@ -1047,8 +1047,8 @@ This method requires to get, from each algorithm, not only the rank, but
 \end_layout
 
 \begin_layout Standard
-I use a linear combination of the scores and received from the 2 different
- algorithms, in the form:
+I use a linear combination of the scores received from the 2 different algorithm
+s, in the form:
 \end_layout
 
 \begin_layout Standard
@@ -1523,9 +1523,7 @@ Using Dataset_2, I evaluated again the performances of User Based and Item
 \end_layout
 
 \begin_layout Standard
-Again, I compared it against the baseline popularity algorithm, and also
- run a Stochastic Aggregation algorithm using the 2 algorithms giving the
- best performance.
+Again, I compared it against the baseline popularity algorithm.
  The best performance are summarized in Table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1915,22 +1913,15 @@ I created Dataset_3 to evaluate the performances of the algorithms on a
 \end_layout
 
 \begin_layout Standard
-The results for Dataset_3 shown in Table 
+The results for Dataset_3, shown in Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "Synth_CF_DS3"
 
 \end_inset
 
- are slightly lower than those of Dataset_2 shown in Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "Synth_CF_DS2"
-
-\end_inset
-
-, either because of the longer listening history, or the smaller number
- of users (and then of neighbors).
+, are slightly lower than those of Dataset_2, either because of the longer
+ listening history, or the smaller number of users (and then of neighbors).
  However, they still show a consistent beter results for User Based CF over
  Item Based CF, both outperforming the baseline Popularity algorithm.
 \end_layout
@@ -2466,8 +2457,8 @@ reference "UCF-ICF-Popularity"
 
 \end_inset
 
-, MAP of the User Based CF, Item Based CF and Popularity algorithms are
- plotted by length of the user's listening history.
+, the Mean Average Precision of the User Based CF, Item Based CF and Popularity
+ algorithms are plotted by length of the user's listening history.
  The number of users by listening history is also plotted on a different
  scale.
  Here we can see that:
@@ -2476,14 +2467,14 @@ reference "UCF-ICF-Popularity"
 \begin_layout Itemize
 The performances of the popularity algorithm are clearly below the performances
  of the Collaborative Filtering algorithms, and are fairly constant for
- any length of user listening history (only a slight increase)
+ any length of user listening history (only a slight increase).
 \end_layout
 
 \begin_layout Itemize
 The performances of the CF algorithms, on the other hand, both increase
  as the user listening history gets bigger (weither this is totally due
  to the algorithm, or partially due to the performance evaluation methodology
- has not been studied here)
+ has not been studied here).
 \end_layout
 
 \begin_layout Itemize
@@ -2495,7 +2486,7 @@ The vast majority of users have a small listening history.
 
 \begin_layout Itemize
 Although the User Based CF performs better than the Item Based CF in general,
- for small listening history the Item Based performs better
+ for small listening history the Item Based performs better.
 \end_layout
 
 \begin_layout Standard
@@ -2626,7 +2617,8 @@ key "key-1"
 
 , maybe because of the fact that the Item Based CF algorithm in this case
  study has not been callibrated, which might be the reason the Item Based
- CF starts to give lower performances with bigger listening history.
+ CF starts to give lower performances than the User Based CF with increasing
+ listening history.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -3102,7 +3094,7 @@ name "UCF-ICF-Switching"
 
 \begin_layout Standard
 This is however very particular to this dataset and the behavior of the
- User Based algorithm.
+ User Based algorithm, and we should keep in mind not to overfit our model.
  For less obvious situations, it might be interesting to investiguate other
  oracles.
 \end_layout
@@ -3119,8 +3111,8 @@ reference "Results_summary"
 
 \end_inset
 
- summarize all the results of this case study.
- We can clearly see herethe consistency of the results accross 2 difference
+ summarizes all the results of this case study.
+ We can clearly see here the consistency of the results accross 2 difference
  datasets.
 \end_layout
 
@@ -3438,7 +3430,60 @@ Conclusion & Future Work
 \end_layout
 
 \begin_layout Standard
-c
+In this case study, I evaluated the performances of different Collaborative
+ Filtering algorithms, mainly following the work of 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-1"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The results shown here are not fully consistent with those presented in
+ the paper, which I attribute mainly to the fact that I didn't use a callibrated
+ Item Based CF algorithm.
+\end_layout
+
+\begin_layout Standard
+I also tried different feature construction methods, without showing any
+ improvement, and 2 different aggregation methods that proved better than
+ the Ranking Aggregation method (although in the case of the Algorithm Swithing
+ method, this might be due, again, to the use of a non callibrated Item
+ Based CF).
+\end_layout
+
+\begin_layout Standard
+If required to go further, it would be interesting to study in more details
+ the reasons of the poor performances in some situations, knowing that the
+ poor performances are partly due to zero correct recommendation for a large
+ amount of users, especially for those having a short listening history.
+ Understanding the relations between those users and users listening to
+ the same items might help understand if the problem lies in the similarity
+ measure, or if it would definitely be impossible for any algorithm (or
+ human), to give a valuable recommendation.
+\end_layout
+
+\begin_layout Standard
+Although the different feature construction methods evaluated here didn't
+ deliver good performances, analysing the data in more detail could provide
+ insight on how to use the information provided by the number of time a
+ user listened to a particular song, in order to chose more apropriate feature
+ construction method, similarity measures, or scoring function to improve
+ the performances of Collaborative Filtering algorithms.
+\end_layout
+
+\begin_layout Standard
+Also, studying other hybrid methods such as the Cascade method, maybe in
+ combination with a Content Based model, might help improve performances
+ for user with small listening histories.
+\end_layout
+
+\begin_layout Standard
+Another path to explore would be to try the Personality Diagnosis algorithm,
+ which seems to be a promissing Collaborative Filtering variant.
 \end_layout
 
 \begin_layout Bibliography
